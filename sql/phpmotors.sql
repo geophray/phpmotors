@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Dec 23, 2019 at 07:25 PM
--- Server version: 10.3.16-MariaDB
--- PHP Version: 7.3.7
+-- Host: 127.0.0.1
+-- Generation Time: Feb 12, 2020 at 06:58 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -22,10 +22,58 @@ SET time_zone = "+00:00";
 -- Database: `phpmotors`
 --
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carclassification`
+--
+
+CREATE TABLE `carclassification` (
+  `classificationId` int(10) NOT NULL,
+  `classificationName` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `carclassification`
+--
+
+INSERT INTO `carclassification` (`classificationId`, `classificationName`) VALUES
+(1, 'SUV'),
+(2, 'Classic'),
+(3, 'Sports'),
+(4, 'Trucks'),
+(5, 'Used');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clients`
+--
+
+CREATE TABLE `clients` (
+  `clientId` int(10) UNSIGNED NOT NULL,
+  `clientFirstname` varchar(15) NOT NULL,
+  `clientLastname` varchar(25) NOT NULL,
+  `clientEmail` varchar(40) NOT NULL,
+  `clientPassword` varchar(255) NOT NULL,
+  `clientLevel` enum('1','2','3') NOT NULL DEFAULT '1',
+  `comment` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `clients`
+--
+
+INSERT INTO `clients` (`clientId`, `clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `clientLevel`, `comment`) VALUES
+(1, 'Tony', 'Stark', 'tony@starkent.com', ' Iam1ronM@n', '1', 'I am the real Ironman'),
+(2, 'Jeff', 'Maughan', 'geophray@gmail.com', 'ilovephp', '1', NULL);
+
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `inventory`
 --
-DROP TABLE IF EXISTS `inventory`;
+
 CREATE TABLE `inventory` (
   `invId` int(10) NOT NULL,
   `invMake` varchar(30) NOT NULL,
@@ -42,6 +90,7 @@ CREATE TABLE `inventory` (
 --
 -- Dumping data for table `inventory`
 --
+
 INSERT INTO `inventory` (`invId`, `invMake`, `invModel`, `invDescription`, `invImage`, `invThumbnail`, `invPrice`, `invStock`, `invColor`, `classificationId`) VALUES
 (1, 'Jeep ', 'Wrangler', 'The Jeep Wrangler is small and compact with enough power to get you where you want to go. Its great for everyday driving as well as offroading weather that be on the the rocks or in the mud!', '/images/jeep-wrangler.jpg', '/images/jeep-wrangler-tn.jpg', '28045', 4, 'Orange', 1),
 (2, 'Ford', 'Model T', 'The Ford Model T can be a bit tricky to drive. It was the first car to be put into production. You can get it in any color you want as long as it\'s black.', '/images/ford-modelt.jpg', '/images/ford-modelt-tn.jpg', '30000', 2, 'Black', 2),
@@ -60,6 +109,22 @@ INSERT INTO `inventory` (`invId`, `invMake`, `invModel`, `invDescription`, `invI
 (15, 'Dog ', 'Car', 'Do you like dogs? Well this car is for you straight from the 90s from Aspen, Colorado we have the orginal Dog Car complete with fluffy ears.  ', '/images/dog.jpg', '/images/dog-tn.jpg', '35000', 1, 'Brown', 2);
 
 --
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `carclassification`
+--
+ALTER TABLE `carclassification`
+  ADD PRIMARY KEY (`classificationId`);
+
+--
+-- Indexes for table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`clientId`);
+
+--
 -- Indexes for table `inventory`
 --
 ALTER TABLE `inventory`
@@ -67,85 +132,37 @@ ALTER TABLE `inventory`
   ADD KEY `classificationId` (`classificationId`);
 
 --
--- AUTO_INCREMENT for table `inventory`
+-- AUTO_INCREMENT for dumped tables
 --
-ALTER TABLE `inventory`
-  MODIFY `invId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-  
---
--- Table structure for table `carclassification`
---
-DROP TABLE IF EXISTS `carclassification`;
-CREATE TABLE `carclassification` (
-  `classificationId` int(10) NOT NULL,
-  `classificationName` varchar(30) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `carclassification`
---
-INSERT INTO `carclassification` (`classificationId`, `classificationName`) VALUES
-(1, 'SUV'),
-(2, 'Classic'),
-(3, 'Sports'),
-(4, 'Trucks'),
-(5, 'Used');
-
---
--- Indexes for table `carclassification`
---
-ALTER TABLE `carclassification`
-  ADD PRIMARY KEY (`classificationId`);
-  
 --
 -- AUTO_INCREMENT for table `carclassification`
 --
 ALTER TABLE `carclassification`
   MODIFY `classificationId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-  
+
+--
+-- AUTO_INCREMENT for table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `inventory`
+--
+ALTER TABLE `inventory`
+  MODIFY `invId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- Constraints for dumped tables
+--
+
 --
 -- Constraints for table `inventory`
 --
 ALTER TABLE `inventory`
   ADD CONSTRAINT `inventory_ibfk_1` FOREIGN KEY (`classificationId`) REFERENCES `carclassification` (`classificationId`);
 COMMIT;
-
---
--- Table structure for table `clients`
---
-DROP TABLE IF EXISTS `clients`;
-CREATE TABLE `clients` (
-  `clientId` int(10) UNSIGNED NOT NULL,
-  `clientFirstname` varchar(15) NOT NULL,
-  `clientLastname` varchar(25) NOT NULL,
-  `clientEmail` varchar(40) NOT NULL,
-  `clientPassword` varchar(255) NOT NULL,
-  `clientLevel` enum('1','2','3') NOT NULL DEFAULT '1',
-  `comment` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `clients`
---
-
-INSERT INTO `clients` (`clientId`, `clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `clientLevel`, `comment`) VALUES
-(1, 'Tony', 'Stark', 'tony@starkent.com', ' Iam1ronM@n', '1', 'I am the real Ironman');
-
---
--- Indexes for table `clients`
---
-ALTER TABLE `clients`
-  ADD PRIMARY KEY (`clientId`);
-  
---
--- AUTO_INCREMENT for table `clients`
---
-ALTER TABLE `clients`
-  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
-
-  
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
