@@ -20,8 +20,6 @@ foreach ($classifications as $classification) {
  $navList .= "<li><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
 }
 $navList .= '</ul>';
-// echo $navList;
-// exit;
     
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){
