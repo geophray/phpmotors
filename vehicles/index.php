@@ -42,6 +42,49 @@ switch ($action){
     case 'new-classification': // Display add-classification view
         include '../view/add-classification.php';
         break;
+    case 'add-new-vehicle':  // Add new vehicle to the database
+        // Filter and store the data
+        $classificationID = filter_input(INPUT_POST, 'classificationID');
+        $invMake = filter_input(INPUT_POST, 'invMake');
+        $invModel = filter_input(INPUT_POST, 'invModel');
+        $invDescription = filter_input(INPUT_POST, 'invDescription');
+        $invImage = filter_input(INPUT_POST, 'invImage');
+        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail');
+        $invPrice = filter_input(INPUT_POST, 'invPrice');
+        $invStock = filter_input(INPUT_POST, 'invStock');
+        $invColor = filter_input(INPUT_POST, 'invColor');
+
+        // Check for missing input
+        if(empty($classificationID) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
+            $message = "<p>Please provide information for all empty form fields.</p>";
+            // Return visitor to add-vehicle form to complete all fields.
+            include '../view/add-vehicle.php';
+            exit;
+        }
+
+        // Insert the data to the database
+
+        // Check and report the result
+
+        break;
+    case 'add-new-classification': // Add new classification to the database
+        // Filter and store the data
+        $classificationName = filter_input(INPUT_POST, 'new');
+
+        // Check for missing input
+        if(empty($classificationName)) {
+            $message = "<p>Please provide information for all empty form fields.</p>";
+            // Return visitor to form to add a classification.
+            include '../view/add-classification.php';
+            exit;
+        }
+
+        // Insert the data to the database
+
+        // Check and report the result
+            // should return visitor to vehicle management view
+
+        break;
     default:
         include '../view/home.php';
     }
