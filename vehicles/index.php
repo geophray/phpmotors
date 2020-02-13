@@ -63,7 +63,7 @@ switch ($action){
         }
 
         // Insert the data to the database
-        $regOutcome = regVehicle( $invName, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationID );
+        $regOutcome = regVehicle( $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationID );
 
         // Check and report the result
         if ($regOutcome === 1) {
@@ -95,7 +95,7 @@ switch ($action){
         // Check and report the result
             // should return visitor to vehicle management view
         if ($regOutcome === 1) {
-            include '../view/vehicle-man.php';
+            header('Location: ../vehicles/index.php');
             exit;
         } else {
             $message = "<p>Registration of classification " . $classificationName . " failed.  Please try again.</p>";
