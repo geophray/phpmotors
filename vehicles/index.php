@@ -22,10 +22,10 @@ foreach ($classifications as $classification) {
 $navList .= '</ul>';
 
 // Build the dynamic drop-down select list of classifications from the database.
-$classificationList = '<select name="classificationID" id ="classificationID">';
+$classificationList = '<select name="classificationId" id ="classificationId">';
 $classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
 foreach ($classifications as $classification) {
-    $classificationList .= "<option value='" . $classification['classificationID'] . "'>" . $classification['classificationName'] . "</option>";
+    $classificationList .= "<option value='" . $classification['classificationId'] . "'>" . $classification['classificationName'] . "</option>";
 }
 $classificationList .= '</select>';
 
@@ -44,7 +44,7 @@ switch ($action){
         break;
     case 'add-new-vehicle':  // Add new vehicle to the database
         // Filter and store the data
-        $classificationID = filter_input(INPUT_POST, 'classificationID', FILTER_SANITIZE_NUMBER_INT);
+        $classificationId = filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
         $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
         $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
@@ -55,7 +55,7 @@ switch ($action){
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
 
         // Check for missing input
-        if(empty($classificationID) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
+        if(empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
             $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
             // Return visitor to add-vehicle form to complete all fields.
             include '../view/add-vehicle.php';
@@ -63,7 +63,7 @@ switch ($action){
         }
 
         // Insert the data to the database
-        $regOutcome = regVehicle( $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationID );
+        $regOutcome = regVehicle( $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId );
 
         // Check and report the result
         if ($regOutcome === 1) {

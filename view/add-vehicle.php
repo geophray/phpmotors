@@ -28,7 +28,7 @@
             <p>*Note all Fields are Required</p>
             <form id="signin" class="user-management" action="/phpmotors/vehicles/index.php" method="post">
                 <div>
-                    <label for="classificationName">Classification</label>
+                    <label for="classificationId">Classification</label>
                     <?php echo $classificationList; ?>
                 </div>
                 <div>
@@ -41,7 +41,7 @@
                 </div>
                 <div>
                     <label for="invDescription">Description</label>
-                    <input type="text" id="invDescription" name="invDescription" required aria-required="true">
+                    <input type="textarea" rows=5 id="invDescription" name="invDescription" required aria-required="true">
                 </div>
                 <div>
                     <label for="invImage">Image Path</label>
@@ -57,11 +57,11 @@
                 </div>
                 <div>
                     <label for="invStock"># In Stock</label>
-                    <input type="text" id="invStock" name="invStock" required aria-required="true">
+                    <input type="number" id="invStock" name="invStock" required aria-required="true">
                 </div>
                 <div>
                     <label for="invColor">Color</label>
-                    <input type="text" id="invColor" name="invColor" required aria-required="true">
+                    <input type="number" id="invColor" name="invColor" required aria-required="true">
                 </div>
                 <div>
                     <input type="submit" name="submit" id="add-vehicle" value="Add Vehicle">
