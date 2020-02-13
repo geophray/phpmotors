@@ -30,7 +30,7 @@ function regVehicle( $invName, $invModel, $invDescription, $invImage, $invThumbn
     // Create a connection object using the phpmotors connection function
    $db = phpmotorsConnect();
    // The SQL statement
-   $sql = 'INSERT INTO carclassification (invName, invModel, invDescription, invImage, invThumbnail, invPrice, invStock, invColor, classificationID)
+   $sql = 'INSERT INTO inventory (invName, invModel, invDescription, invImage, invThumbnail, invPrice, invStock, invColor, classificationID)
        VALUES (:invName, :invModel, :invDescription, :invImage, :invThumbnail, :invPrice, :invStock, :invColor, :classificationID)';
    // Create the prepared statement using the phpmotors connection
    $stmt = $db->prepare($sql);
