@@ -22,7 +22,7 @@ foreach ($classifications as $classification) {
 $navList .= '</ul>';
 
 // Build the dynamic drop-down select list of classifications from the database.
-$classificationList = '<select name="classificationId" id ="classificationId">';
+$classificationList = '<select name="classificationId" id="classificationId">';
 $classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
 foreach ($classifications as $classification) {
     $classificationList .= "<option value='" . $classification['classificationId'] . "'>" . $classification['classificationName'] . "</option>";

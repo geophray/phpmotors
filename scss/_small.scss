@@ -148,7 +148,7 @@ body {
                         border: 2px solid rgba(255, 0, 0, 0.5);
                         box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.5);
                     }
-                    input {
+                    input, textarea, select {
                         padding: 10px;
                         border-radius: 5px;
                         border: 1px solid $primaryColorLight;
