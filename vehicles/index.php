@@ -56,7 +56,7 @@ switch ($action){
 
         // Check for missing input
         if(empty($classificationID) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
-            $message = "<p>Please provide information for all empty form fields.</p>";
+            $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
             // Return visitor to add-vehicle form to complete all fields.
             include '../view/add-vehicle.php';
             exit;
@@ -67,11 +67,11 @@ switch ($action){
 
         // Check and report the result
         if ($regOutcome === 1) {
-            $message = "The $invMake $invModel was added successfully!";
+            $message = "<p class='success-message'>The $invMake $invModel was added successfully!</p>";
             include '../view/add-vehicle.php';
             exit;
         } else {
-            $message = "<p>Registration of $invMake $invModel failed.  Please try again.</p>";
+            $message = "<p class='error-message'>Registration of $invMake $invModel failed.  Please try again.</p>";
             include '../view/add-vehicle.php';
             exit;
         }
@@ -83,7 +83,7 @@ switch ($action){
         
         // Check for missing input
         if(empty($classificationName)) {
-            $message = "<p>Please provide information for all empty form fields.</p>";
+            $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
             // Return visitor to form to add a classification.
             include '../view/add-classification.php';
             exit;
@@ -98,7 +98,7 @@ switch ($action){
             header('Location: ../vehicles/index.php');
             exit;
         } else {
-            $message = "<p>Registration of classification " . $classificationName . " failed.  Please try again.</p>";
+            $message = "<p class='error-message'>Registration of classification $classificationName failed. Please try again.</p>";
             include '../view/add-classification.php';
             exit;
         }

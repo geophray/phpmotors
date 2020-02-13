@@ -59,6 +59,21 @@ body {
                 font-size: 1.1em;
             }
 
+            p {
+                .error-message {
+                    color: red;
+                    font-size: larger;
+                    font-style: italic;
+                    font-weight: 600;
+                }
+                .success-message {
+                    color: green;
+                    font-size: larger;
+                    font-style: italic;
+                    font-weight: 600;
+                }
+            }
+
             #own_a_delo_today {
                 display: flex;
                 flex-flow: column nowrap;

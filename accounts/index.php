@@ -39,7 +39,7 @@ switch ($action){
 
         // Check for missing data
         if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientPassword)){
-            $message = '<p>Please provide information for all empty form fields.</p>';
+            $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
             include '../view/registration.php';
             exit; 
         }
@@ -49,11 +49,11 @@ switch ($action){
 
         // Check and report the result.
         if ($regOutcome === 1) {
-            $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
+            $message = "<p class='success-message'>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
             include '../view/login.php';
             exit;
         } else {
-            $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+            $message = "<p class='error-message'>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
             include '../view/registration.php';
             exit;
         }
