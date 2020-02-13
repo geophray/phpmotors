@@ -33,35 +33,35 @@
                 </div>
                 <div>
                     <label for="invMake">Make</label>
-                    <input type="text" id="invMake" name="invMake" required aria-required="true">
+                    <input type="text" id="invMake" name="invMake">
                 </div>
                 <div>
                     <label for="invModel">Model</label>
-                    <input type="text" id="invModel" name="invModel" required aria-required="true">
+                    <input type="text" id="invModel" name="invModel">
                 </div>
                 <div>
                     <label for="invDescription">Description</label>
-                    <input type="textarea" rows=5 id="invDescription" name="invDescription" required aria-required="true">
+                    <textarea rows=5 id="invDescription" name="invDescription"></textarea>
                 </div>
                 <div>
                     <label for="invImage">Image Path</label>
-                    <input type="text" id="invImage" name="invImage" value="/phpmotors/images/no-image.png" required aria-required="true">
+                    <input type="text" id="invImage" name="invImage" value="/phpmotors/images/no-image.png">
                 </div>
                 <div>
                     <label for="invThumbnail">Thumbnail Path</label>
-                    <input type="text" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png" required aria-required="true">
+                    <input type="text" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png">
                 </div>
                 <div>
                     <label for="invPrice">Price</label>
-                    <input type="text" id="invPrice" name="invPrice" required aria-required="true">
+                    <input type="number" id="invPrice" name="invPrice">
                 </div>
                 <div>
                     <label for="invStock"># In Stock</label>
-                    <input type="number" id="invStock" name="invStock" required aria-required="true">
+                    <input type="number" id="invStock" name="invStock">
                 </div>
                 <div>
                     <label for="invColor">Color</label>
-                    <input type="number" id="invColor" name="invColor" required aria-required="true">
+                    <input type="text" id="invColor" name="invColor">
                 </div>
                 <div>
                     <input type="submit" name="submit" id="add-vehicle" value="Add Vehicle">
