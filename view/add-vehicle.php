@@ -33,35 +33,35 @@
                 </div>
                 <div>
                     <label for="invMake">Make</label>
-                    <input type="text" id="invMake" name="invMake">
+                    <input type="text" value="<?php if(isset($_POST['invMake'])) { echo $_POST['invMake'];};?>" id="invMake" name="invMake">
                 </div>
                 <div>
                     <label for="invModel">Model</label>
-                    <input type="text" id="invModel" name="invModel">
+                    <input type="text" value="<?php if(isset($_POST['invModel'])) { echo $_POST['invModel'];};?>" id="invModel" name="invModel">
                 </div>
                 <div>
                     <label for="invDescription">Description</label>
-                    <textarea rows=5 id="invDescription" name="invDescription"></textarea>
+                    <textarea rows=5 id="invDescription" name="invDescription"><?php if(isset($_POST['invDescription'])) { echo $_POST['invDescription'];};?></textarea>
                 </div>
                 <div>
                     <label for="invImage">Image Path</label>
-                    <input type="text" id="invImage" name="invImage" value="/phpmotors/images/no-image.png">
+                    <input type="text" value="<?php if(isset($_POST['invImage'])) { echo $_POST['invImage'];};?>" id="invImage" name="invImage" value="/phpmotors/images/no-image.png">
                 </div>
                 <div>
                     <label for="invThumbnail">Thumbnail Path</label>
-                    <input type="text" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png">
+                    <input type="text" value="<?php if(isset($_POST['invThumbnail'])) { echo $_POST['invThumbnail'];};?>" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png">
                 </div>
                 <div>
                     <label for="invPrice">Price</label>
-                    <input type="number" id="invPrice" name="invPrice">
+                    <input type="number" value="<?php if(isset($_POST['invPrice'])) { echo $_POST['invPrice'];};?>" id="invPrice" name="invPrice">
                 </div>
                 <div>
                     <label for="invStock"># In Stock</label>
-                    <input type="number" id="invStock" name="invStock">
+                    <input type="number" value="<?php if(isset($_POST['invStock'])) { echo $_POST['invStock'];};?>" id="invStock" name="invStock">
                 </div>
                 <div>
                     <label for="invColor">Color</label>
-                    <input type="text" id="invColor" name="invColor">
+                    <input type="text" value="<?php if(isset($_POST['invColor'])) { echo $_POST['invColor'];};?>" id="invColor" name="invColor">
                 </div>
                 <div>
                     <input type="submit" name="submit" id="add-vehicle" value="Add Vehicle">
