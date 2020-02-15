@@ -5,7 +5,7 @@ function getClassifications(){
     // Create a connection object from the phpmotors connection function
     $db = phpmotorsConnect(); 
     // The SQL statement to be used with the database 
-    $sql = 'SELECT classificationID, classificationName FROM carclassification ORDER BY classificationName ASC'; 
+    $sql = 'SELECT classificationId, classificationName FROM carclassification ORDER BY classificationName ASC'; 
     // The next line creates the prepared statement using the phpmotors connection      
     $stmt = $db->prepare($sql);
     // The next line runs the prepared statement 
