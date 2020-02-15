@@ -45,11 +45,11 @@
                 </div>
                 <div>
                     <label for="invImage">Image Path</label>
-                    <input type="text" value="<?php if(isset($_POST['invImage'])) { echo $_POST['invImage'];};?>" id="invImage" name="invImage" value="/phpmotors/images/no-image.png">
+                    <input type="text" value="<?php if(isset($_POST['invImage'])) { echo $_POST['invImage'];} else { echo '/phpmotors/images/no-image.png';};?>" id="invImage" name="invImage">
                 </div>
                 <div>
                     <label for="invThumbnail">Thumbnail Path</label>
-                    <input type="text" value="<?php if(isset($_POST['invThumbnail'])) { echo $_POST['invThumbnail'];};?>" id="invThumbnail" name="invThumbnail" value="/phpmotors/images/no-image.png">
+                    <input type="text" value="<?php if(isset($_POST['invImage'])) { echo $_POST['invImage'];} else { echo '/phpmotors/images/no-image.png';};?>" id="invThumbnail" name="invThumbnail">
                 </div>
                 <div>
                     <label for="invPrice">Price</label>
