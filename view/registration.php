@@ -28,19 +28,20 @@
             <form id="signin" class="user-management" method="post" action="/phpmotors/accounts/index.php">
                 <div>
                     <label for="clientFirstname">First Name</label>
-                    <input type="text" id="clientFirstname" name="clientFirstname">
+                    <input type="text" id="clientFirstname" name="clientFirstname" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";}  ?> required>
                 </div>
                 <div>
                     <label for="clientLastname">Last Name</label>
-                    <input type="text" id="clientLastname" name="clientLastname" required aria-required="true">
+                    <input type="text" id="clientLastname" name="clientLastname" <?php if(isset($clientLastname)){echo "value='$clientLastname'";}  ?> required>
                 </div>
                 <div>
                     <label for="clientEmail">Email</label>
-                    <input type="email" id="clientEmail" name="clientEmail" required aria-required="true">
+                    <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required pattern="[\w*]+@[\w]+\.[\w]{2,4}">
                 </div>
                 <div>
                     <label for="clientPassword">Password</label>
-                    <input type="password" id="clientPassword" name="clientPassword" required aria-required="true">
+                    <input type="password" id="clientPassword" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                    <span class="fine-print">Must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character.</span>
                 </div>
                 <div>
                     <input type="submit" name="submit" id="sign-in" value="Create My Account">

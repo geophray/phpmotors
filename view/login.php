@@ -26,17 +26,20 @@
                 }
             ?>
 
-            <form id="signin" class="user-management" action="/phpmotors/view/index.php" method="post">
+            <form id="signin" class="user-management" action="/phpmotors/accounts/index.php" method="post">
                 <div>
                     <label for="clientEmail">Email</label>
-                    <input type="email" id="clientEmail" name="clientEmail" required aria-required="true">
+                    <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required pattern="[\w*]+@[\w]+\.[\w]{2,4}">
                 </div>
                 <div>
                     <label for="clientPassword">Password</label>
-                    <input type="password" id="clientPassword" name="clientPassword" required aria-required="true">
+                    <input type="password" id="clientPassword" name="clientPassword" required pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
+                    <span class="fine-print">Must be at least 8 characters and contain at least 1 number, 1 capital letter, and 1 special character.</span>
                 </div>
                 <div>
                     <input type="submit" name="submit" id="sign-in" value="Sign In">
+                    <!-- Add the action name - value pair -->
+                    <input type="hidden" name="action" value="sign-in">
                 </div>
                 <span>Don't have an account? <a href='/phpmotors/accounts/index.php?action=registration' title='Create a new account.'>Register Here</a>.</span>
             </form>
