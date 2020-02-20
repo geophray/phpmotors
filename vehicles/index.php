@@ -7,22 +7,17 @@ require_once '../library/connections.php';
 require_once '../model/main-model.php';
 // Get the PHP Motors main model 
 require_once '../model/vehicles-model.php';
+// Get the custom functions library
+require_once '../library/functions.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
-// var_dump($classifications);
-//     exit;
 
-// Build a navigation bar using the $classifications array
-$navList = '<ul>';
-$navList .= "<li><a href='/phpmotors/index.php' title='View the PHP Motors home page'>Home</a></li>";
-foreach ($classifications as $classification) {
- $navList .= "<li><a href='/phpmotors/index.php?action=".urlencode($classification['classificationName'])."' title='View our $classification[classificationName] product line'>$classification[classificationName]</a></li>";
-}
-$navList .= '</ul>';
+// Build the navigation menu
+$navList = buildNavMenu($classifications);
 
 // Build the dynamic drop-down select list of classifications from the database.
-$classificationList = '<select name="classificationId" id="classificationId">';
+$classificationList = '<select name="classificationId" id="classificationId" required>';
 $classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
 foreach ($classifications as $classification) {
     $classificationList .= "<option value='" . $classification['classificationId'] . "'>" . $classification['classificationName'] . "</option>";
@@ -50,7 +45,7 @@ switch ($action){
         $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
         $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_URL);
         $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_URL);
-        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_INT);
+        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT , FILTER_FLAG_ALLOW_FRACTION);
         $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
 
