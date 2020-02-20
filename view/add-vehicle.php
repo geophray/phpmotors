@@ -1,6 +1,19 @@
+<?php
+$classificationList = '<select name="classificationId" id="classificationId" required>';
+$classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
+foreach ($classifications as $classification) {
+    $classificationList .= "<option value='$classification[classificationId]'";
+    if(isset($classificationId)) {
+        if($classificationId == $classification['classificationId']) {
+            $classificationList .= " selected ";
+        }
+    }
+    $classificationList .= ">$classification[classificationName]</option>";
+}
+$classificationList .= '</select>';
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,11 +46,11 @@
                 </div>
                 <div>
                     <label for="invMake">Make</label>
-                    <input type="text" <?php if(isset($invMake)){echo "value='$invMake'";}  ?> id="invMake" name="invMake" required pattern="[\w]*">
+                    <input type="text" <?php if(isset($invMake)){echo "value='$invMake'";}  ?> id="invMake" name="invMake" required pattern="^[a-zA-Z\s]*$">
                 </div>
                 <div>
                     <label for="invModel">Model</label>
-                    <input type="text" <?php if(isset($invModel)){echo "value='$invModel'";}  ?> id="invModel" name="invModel" required pattern="[\w]*">
+                    <input type="text" <?php if(isset($invModel)){echo "value='$invModel'";}  ?> id="invModel" name="invModel" required pattern="^[\w\s-]*$">
                 </div>
                 <div>
                     <label for="invDescription">Description</label>
@@ -45,15 +58,15 @@
                 </div>
                 <div>
                     <label for="invImage">Image Path</label>
-                    <input type="text" <?php if(isset($invImage)){echo "value='$invImage'";} else { echo "value='/phpmotors/images/no-image.png'";};?> id="invImage" name="invImage" required pattern="(https://?|http://?|/?).*?">
+                    <input type="text" <?php if(isset($invImage)){echo "value='$invImage'";} else { echo "value='/phpmotors/images/no-image.png'";};?> id="invImage" name="invImage" required pattern="^(https:\/\/|http:\/\/|\/){1}.*(\.[A-Za-z]{3,4})$">
                 </div>
                 <div>
                     <label for="invThumbnail">Thumbnail Path</label>
-                    <input type="text" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} else { echo "value='/phpmotors/images/no-image.png'";};?> id="invThumbnail" name="invThumbnail" required pattern="(https://?|http://?|/?).*?">
+                    <input type="text" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} else { echo "value='/phpmotors/images/no-image.png'";};?> id="invThumbnail" name="invThumbnail" required pattern="^(https:\/\/|http:\/\/|\/){1}.*(\.[A-Za-z]{3,4})$">
                 </div>
                 <div>
                     <label for="invPrice">Price</label>
-                    <input type="string" <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?> id="invPrice" name="invPrice" required pattern="([0-9]*)\.?[0-9]{2,2}?">
+                    <input type="text" <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?> id="invPrice" name="invPrice" required pattern="^([0-9]*)\.?[0-9]{2,2}?$">
                 </div>
                 <div>
                     <label for="invStock"># In Stock</label>
@@ -61,7 +74,7 @@
                 </div>
                 <div>
                     <label for="invColor">Color</label>
-                    <input type="text" <?php if(isset($invColor)){echo "value='$invColor'";}  ?> id="invColor" name="invColor" required>
+                    <input type="text" <?php if(isset($invColor)){echo "value='$invColor'";}  ?> id="invColor" name="invColor" required pattern="^[a-zA-Z\s]*$">
                 </div>
                 <div>
                     <input type="submit" name="submit" id="add-vehicle" value="Add Vehicle">

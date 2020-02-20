@@ -16,13 +16,19 @@ $classifications = getClassifications();
 // Build the navigation menu
 $navList = buildNavMenu($classifications);
 
-// Build the dynamic drop-down select list of classifications from the database.
-$classificationList = '<select name="classificationId" id="classificationId" required>';
-$classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
-foreach ($classifications as $classification) {
-    $classificationList .= "<option value='" . $classification['classificationId'] . "'>" . $classification['classificationName'] . "</option>";
-}
-$classificationList .= '</select>';
+// // Build the dynamic drop-down select list of classifications from the database.
+// $classificationList = '<select name="classificationId" id="classificationId" required>';
+// $classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
+// foreach ($classifications as $classification) {
+//     $classificationList .= "<option value='" . $classification['classificationId'] . "'";
+//     if(isset($classificationId)) {
+//         if($classificationId === $classification['classificationId']) {
+//             $classificationList .= " selected ";
+//         }
+//     }
+//     $classificationList .= ">" . $classification['classificationName'] . "</option>";
+// }
+// $classificationList .= '</select>';
 
 // Control structure for delivering views
 $action = filter_input(INPUT_POST, 'action');
@@ -48,6 +54,36 @@ switch ($action){
         $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT , FILTER_FLAG_ALLOW_FRACTION);
         $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+
+        // echo "classificationId: " . $classificationId . "<br>";
+        // echo "invMake: " . $invMake . "<br>";
+        // echo "invModel: " . $invModel . "<br>";
+        // echo "invImage: " . $invImage . "<br>";
+        // echo "invThumbnail: " . $invThumbnail . "<br>";
+        // echo "invPrice: " . $invPrice . "<br>";
+        // echo "invStock: " . $invStock . "<br>";
+        // echo "invColor: " . $invColor . "<br>";
+        // echo "separator ==============================================================================================" . "<br>";
+
+        // Validate the stored data
+        $classificationId = validateClassificationId($classificationId);
+        $invMake = validateStringRegex($invMake);
+        $invModel = validateInvModel($invModel);
+        $invImage = validateFilePath($invImage);
+        $invThumbnail = validateFilePath($invThumbnail);
+        $invPrice = validateInvPrice($invPrice);
+        $invStock = validateInvStock($invStock);
+        $invColor = validateStringRegex($invColor);
+
+        // echo "classificationId: " . $classificationId . "<br>";
+        // echo "invMake: " . $invMake . "<br>";
+        // echo "invModel: " . $invModel . "<br>";
+        // echo "invImage: " . $invImage . "<br>";
+        // echo "invThumbnail: " . $invThumbnail . "<br>";
+        // echo "invPrice: " . $invPrice . "<br>";
+        // echo "invStock: " . $invStock . "<br>";
+        // echo "invColor: " . $invColor . "<br>";
+        
 
         // Check for missing input
         if(empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
