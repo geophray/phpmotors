@@ -11,6 +11,10 @@ function buildNavMenu($classifications) {
     return $navList;
 }
 
+// ****************************************************
+// Functions for validating user data
+// ****************************************************
+
 // Function for server side validation of email addresses submitted via forms.
 function checkEmail($clientEmail) {
     $valEmail = filter_var($clientEmail, FILTER_VALIDATE_EMAIL);
@@ -26,5 +30,19 @@ function checkEmail($clientEmail) {
     return preg_match($pattern, $clientPassword);
 }
 
+// ****************************************************
+// Functions for validating vehicle/classification data
+// ****************************************************
 
+// Function for server side validation of classificationName.
+function checkClassificationName($classificationName) {
+    $pattern = '/[\w\s]*/';
+    return preg_match($pattern, $classificationName);
+}
+
+// Function for server side validation of classificationId.
+function checkClassificationId($classificationId) {
+    $valClassificationId = filter_var($classificationId, FILTER_VALIDATE_INT);
+    return $valClassificationId;
+}
 

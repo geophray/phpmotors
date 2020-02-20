@@ -29,7 +29,7 @@
             <form id="signin" class="user-management" action="/phpmotors/vehicles/index.php" method="post">
                 <div>
                     <label for="classificationName">Classification Name</label>
-                    <input type="text" id="classificationName" name="classificationName">
+                    <input type="text" id="classificationName" name="classificationName" required pattern="[\w\s]*">
                 </div>
                 <div>
                     <input type="submit" name="submit" id="add-classification" value="Add Classification">

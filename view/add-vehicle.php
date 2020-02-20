@@ -33,35 +33,35 @@
                 </div>
                 <div>
                     <label for="invMake">Make</label>
-                    <input type="text" value="<?php if(isset($_POST['invMake'])) { echo $_POST['invMake'];};?>" id="invMake" name="invMake">
+                    <input type="text" <?php if(isset($invMake)){echo "value='$invMake'";}  ?> id="invMake" name="invMake" required pattern="[\w]*">
                 </div>
                 <div>
                     <label for="invModel">Model</label>
-                    <input type="text" value="<?php if(isset($_POST['invModel'])) { echo $_POST['invModel'];};?>" id="invModel" name="invModel">
+                    <input type="text" <?php if(isset($invModel)){echo "value='$invModel'";}  ?> id="invModel" name="invModel" required pattern="[\w]*">
                 </div>
                 <div>
                     <label for="invDescription">Description</label>
-                    <textarea rows=5 id="invDescription" name="invDescription"><?php if(isset($_POST['invDescription'])) { echo $_POST['invDescription'];};?></textarea>
+                    <textarea rows=5 id="invDescription" name="invDescription" required><?php if(isset($invDescription)) { echo $invDescription;};?></textarea>
                 </div>
                 <div>
                     <label for="invImage">Image Path</label>
-                    <input type="text" value="<?php if(isset($_POST['invImage'])) { echo $_POST['invImage'];} else { echo '/phpmotors/images/no-image.png';};?>" id="invImage" name="invImage">
+                    <input type="text" <?php if(isset($invImage)){echo "value='$invImage'";} else { echo "value='/phpmotors/images/no-image.png'";};?> id="invImage" name="invImage" required pattern="(https://?|http://?|/?).*?">
                 </div>
                 <div>
                     <label for="invThumbnail">Thumbnail Path</label>
-                    <input type="text" value="<?php if(isset($_POST['invImage'])) { echo $_POST['invImage'];} else { echo '/phpmotors/images/no-image.png';};?>" id="invThumbnail" name="invThumbnail">
+                    <input type="text" <?php if(isset($invThumbnail)){echo "value='$invThumbnail'";} else { echo "value='/phpmotors/images/no-image.png'";};?> id="invThumbnail" name="invThumbnail" required pattern="(https://?|http://?|/?).*?">
                 </div>
                 <div>
                     <label for="invPrice">Price</label>
-                    <input type="number" value="<?php if(isset($_POST['invPrice'])) { echo $_POST['invPrice'];};?>" id="invPrice" name="invPrice">
+                    <input type="string" <?php if(isset($invPrice)){echo "value='$invPrice'";}  ?> id="invPrice" name="invPrice" required pattern="([0-9]*)\.?[0-9]{2,2}?">
                 </div>
                 <div>
                     <label for="invStock"># In Stock</label>
-                    <input type="number" value="<?php if(isset($_POST['invStock'])) { echo $_POST['invStock'];};?>" id="invStock" name="invStock">
+                    <input type="number" <?php if(isset($invStock)){echo "value='$invStock'";}  ?> id="invStock" name="invStock" required>
                 </div>
                 <div>
                     <label for="invColor">Color</label>
-                    <input type="text" value="<?php if(isset($_POST['invColor'])) { echo $_POST['invColor'];};?>" id="invColor" name="invColor">
+                    <input type="text" <?php if(isset($invColor)){echo "value='$invColor'";}  ?> id="invColor" name="invColor" required>
                 </div>
                 <div>
                     <input type="submit" name="submit" id="add-vehicle" value="Add Vehicle">

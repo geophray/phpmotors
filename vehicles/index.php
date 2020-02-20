@@ -76,8 +76,11 @@ switch ($action){
         // Filter and store the data
         $classificationName = filter_input(INPUT_POST, 'classificationName', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
         
+        // Check classification Name
+        $checkClassificationName = checkClassificationName($classificationName);
+
         // Check for missing input
-        if(empty($classificationName)) {
+        if(empty($checkClassificationName)) {
             $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
             // Return visitor to form to add a classification.
             include '../view/add-classification.php';
