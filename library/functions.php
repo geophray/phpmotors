@@ -36,7 +36,7 @@ function checkEmail($clientEmail) {
 
 // Function for server side validation of classificationName.
 function checkClassificationName($classificationName) {
-    $pattern = '/^[a-zA-Z\s]*$/';
+    $pattern = '/^[a-zA-Z\s]+$/';
     return preg_match($pattern, $classificationName);
 }
 
@@ -49,7 +49,7 @@ function validateClassificationId($classificationId) {
 // Function for validating strings with the following regex pattern: /^[a-zA-Z\s]*$/
 // Returns input string if pattern matches, 0 if not.
 function validateStringRegex($stringInput) {
-    $pattern = '/^[a-zA-Z\s]*$/';
+    $pattern = '/^[a-zA-Z\s]+$/';
     $result = preg_match($pattern, $stringInput);
     if($result) {
         return $stringInput;
@@ -61,7 +61,7 @@ function validateStringRegex($stringInput) {
 // Function for validating invModel with the following regex pattern: /^[\w\s]*$/
 // Returns input string if pattern matches, 0 if not.
 function validateInvModel($invModel) {
-    $pattern = '/^[\w\s-]*$/';
+    $pattern = '/^[\w\s-]+$/';
     $result = preg_match($pattern, $invModel);
     if($result) {
         return $invModel;
@@ -72,7 +72,7 @@ function validateInvModel($invModel) {
 
 // Function for validating image url path against regex pattern: /^(https:\/\/|http:\/\/|\/){1}.*(\.[A-Za-z]{3,4})$/i
 function validateFilePath($pathInput) {
-    $pattern = '/^(https:\/\/|http:\/\/|\/){1}.*(\.[A-Za-z]{3,4})$/i';
+    $pattern = '/^(https:\/\/|http:\/\/|\/){1}.+(\.[A-Za-z]{3,4})$/i';
     $result = preg_match($pattern, $pathInput);
     if($result === 1) {
         return $pathInput;
@@ -83,7 +83,7 @@ function validateFilePath($pathInput) {
 
 // Function for validating inventory price against regex pattern: /^([0-9]*)\.?[0-9]{2,2}?$/
     function validateInvPrice($invPrice) {
-        $pattern = '/^([0-9]*)\.?[0-9]{2,2}?$/';
+        $pattern = '/^([0-9]+)\.?[0-9]{2,2}?$/';
         $result = preg_match($pattern, $invPrice);
         if($result) {
             return $invPrice;

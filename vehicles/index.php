@@ -55,16 +55,6 @@ switch ($action){
         $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
         $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
 
-        // echo "classificationId: " . $classificationId . "<br>";
-        // echo "invMake: " . $invMake . "<br>";
-        // echo "invModel: " . $invModel . "<br>";
-        // echo "invImage: " . $invImage . "<br>";
-        // echo "invThumbnail: " . $invThumbnail . "<br>";
-        // echo "invPrice: " . $invPrice . "<br>";
-        // echo "invStock: " . $invStock . "<br>";
-        // echo "invColor: " . $invColor . "<br>";
-        // echo "separator ==============================================================================================" . "<br>";
-
         // Validate the stored data
         $classificationId = validateClassificationId($classificationId);
         $invMake = validateStringRegex($invMake);
@@ -74,16 +64,6 @@ switch ($action){
         $invPrice = validateInvPrice($invPrice);
         $invStock = validateInvStock($invStock);
         $invColor = validateStringRegex($invColor);
-
-        // echo "classificationId: " . $classificationId . "<br>";
-        // echo "invMake: " . $invMake . "<br>";
-        // echo "invModel: " . $invModel . "<br>";
-        // echo "invImage: " . $invImage . "<br>";
-        // echo "invThumbnail: " . $invThumbnail . "<br>";
-        // echo "invPrice: " . $invPrice . "<br>";
-        // echo "invStock: " . $invStock . "<br>";
-        // echo "invColor: " . $invColor . "<br>";
-        
 
         // Check for missing input
         if(empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
@@ -114,7 +94,7 @@ switch ($action){
         
         // Check classification Name
         $checkClassificationName = checkClassificationName($classificationName);
-
+        
         // Check for missing input
         if(empty($checkClassificationName)) {
             $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
