@@ -36,7 +36,7 @@
                 </div>
                 <div>
                     <label for="clientEmail">Email</label>
-                    <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required pattern="[\w*]+@[\w]+\.[\w]{2,4}">
+                    <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required pattern="[\w\\.\+_-*]+@[\w]+\.[\w]{2,4}">
                 </div>
                 <div>
                     <label for="clientPassword">Password</label>
