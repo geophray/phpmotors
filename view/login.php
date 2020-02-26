@@ -21,12 +21,12 @@
             <h1>Sign In to PHP Motors!</h1>
 
             <?php
-                if (isset($message)) {
-                    echo $message;
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
                 }
             ?>
 
-            <form id="signin" class="user-management" action="/phpmotors/accounts/index.php" method="post">
+            <form id="signin" class="user-management" action="/phpmotors/accounts/" method="post">
                 <div>
                     <label for="clientEmail">Email</label>
                     <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";}  ?> required pattern="[\w*]+@[\w]+\.[\w]{2,4}">
