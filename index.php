@@ -13,6 +13,11 @@ $classifications = getClassifications();
 
 // Build the navigation menu
 $navList = buildNavMenu($classifications);
+
+// Check to see if firstname cookie exists (to be able to display welcome message)
+if (isset($_COOKIE['firstname'])) {
+    $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+}
     
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){

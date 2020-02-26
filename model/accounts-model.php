@@ -1,7 +1,6 @@
 <?php
 //PHP Motors Accounts Model
 
-
 //Function to handle site registrations.
 function regClient( $clientFirstname, $clientLastname, $clientEmail, $clientPassword ) {
      // Create a connection object using the phpmotors connection function
@@ -26,4 +25,29 @@ function regClient( $clientFirstname, $clientLastname, $clientEmail, $clientPass
     $stmt->closeCursor();
     // Return the indication of success (rows changed)
     return $rowsChanged;
+}
+
+// Function for checking for existing email address in the db.
+function emailExists ( $email ) { 
+    // Create a connection object using the phpmotors connection function
+    $db = phpmotorsConnect();
+    // The SQL statement
+    $sql = 'SELECT clientEmail 
+            FROM clients 
+            WHERE clientEmail = :email';
+    // Create the prepared statement using the phpmotors connection
+    $stmt = $db->prepare($sql);
+    // Bind the email variable to the placeholder in the sql statement
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    // Run the statement
+    $stmt->execute();
+    $isMatch = $stmt->fetch(PDO::FETCH_NUM);
+    // Close db connection
+    $stmt->closeCursor();
+    // Check if sql statement returned a match
+    if(empty($isMatch)){
+        return 0;
+    } else {
+        return 1;
+    }
 }
