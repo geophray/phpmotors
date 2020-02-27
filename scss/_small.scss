@@ -71,6 +71,11 @@ body {
                 font-style: italic;
                 font-weight: 600;
             }
+
+            .label {
+                font-weight: 600;
+                color: $primaryColor;
+            }
         
             #own_a_delo_today {
                 display: flex;

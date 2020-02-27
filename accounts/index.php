@@ -44,7 +44,7 @@ switch ($action){
         // Check if email exists in clients database table
         $accountExists = emailExists($clientEmail);
         if ( $accountExists ) {
-            $message = '<p class="error-message">There is already an account under the email ' . $clientEmail . '. Would you like to log in instead? </p>';
+            $_SESSION['message'] = '<p class="error-message">There is already an account under the email ' . $clientEmail . '. Would you like to log in instead? </p>';
             include '../view/login.php';
             exit;
         }
@@ -88,7 +88,7 @@ switch ($action){
 
         // Check for missing data
         if(empty($clientEmail) || empty($checkPassword)){
-            $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
+            $_SESSION['message'] = "<p class='error-message'>Please provide information for all empty form fields.</p>";
             include '../view/login.php';
             exit; 
         }
@@ -102,12 +102,14 @@ switch ($action){
         // If the hashes don't match create an error
         // and return to the login view
         if(!$hashCheck) {
-        $message = '<p class="notice">Please check your password and try again.</p>';
+        $_SESSION['message'] = "<p class='error-message'>Please check your password and try again.</p>";
         include '../view/login.php';
         exit;
         }
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
+        // Reset the firstname cookie
+        setcookie("firstname", $clientData['clientFirstname'], strtotime("+ 1 year"), "/");
         // Remove the password from the array
         // the array_pop function removes the last
         // element from an array
@@ -122,7 +124,12 @@ switch ($action){
     case 'login': // Loads the login.php view
         include '../view/login.php';
         break;
+    case 'logout':
+        session_destroy();
+        include '../index.php';
+        break;
     default:
-    
+        include '../view/admin.php';
+        break;
     }
 ?>

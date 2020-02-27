@@ -1,16 +1,22 @@
 <?php
-$classificationList = '<select name="classificationId" id="classificationId" required>';
-$classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
-foreach ($classifications as $classification) {
-    $classificationList .= "<option value='$classification[classificationId]'";
-    if(isset($classificationId)) {
-        if($classificationId == $classification['classificationId']) {
-            $classificationList .= " selected ";
-        }
+    // If the current user doesn't have a session set, is not logged in, or is not an admin, redirect to home view.
+    if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || $_SESSION['clientData']['clientLevel'] == 1) {
+        header('Location: /phpmotors/');
+        exit;
     }
-    $classificationList .= ">$classification[classificationName]</option>";
-}
-$classificationList .= '</select>';
+    // Build the sticky classificationList select field
+    $classificationList = '<select name="classificationId" id="classificationId" required>';
+    $classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
+    foreach ($classifications as $classification) {
+        $classificationList .= "<option value='$classification[classificationId]'";
+        if(isset($classificationId)) {
+            if($classificationId == $classification['classificationId']) {
+                $classificationList .= " selected ";
+            }
+        }
+        $classificationList .= ">$classification[classificationName]</option>";
+    }
+    $classificationList .= '</select>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
