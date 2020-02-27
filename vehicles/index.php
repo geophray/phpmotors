@@ -34,9 +34,9 @@ $navList = buildNavMenu($classifications);
 // $classificationList .= '</select>';
 
 // Control structure for delivering views
-$action = filter_input(INPUT_POST, 'action');
+$action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
 if ($action == NULL){
-    $action = filter_input(INPUT_GET, 'action');
+    $action = filter_input(INPUT_GET, 'action', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
 }
 
 switch ($action){
