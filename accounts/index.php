@@ -124,11 +124,11 @@ switch ($action){
     case 'login': // Loads the login.php view
         include '../view/login.php';
         break;
-    case 'logout':
+    case 'logout': // Log out of current session
         session_destroy();
         include '../index.php';
         break;
-    default:
+    default: // Load the admin view
         include '../view/admin.php';
         break;
     }
