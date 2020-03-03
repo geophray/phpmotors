@@ -72,6 +72,22 @@ body {
                 font-weight: 600;
             }
 
+            .modify {
+                background-color: $primaryColor;
+                color: $white;
+            }
+
+            .delete {
+                background-color: red;
+                color: $white;
+            }
+
+            .modify, .delete {
+                padding: 5px;
+                text-decoration: none;
+                border-radius: 5px;
+            }
+
             .label {
                 font-weight: 600;
                 color: $primaryColor;
@@ -182,6 +198,12 @@ body {
                         font-style: italic;
                         color: $primaryColor;
                     }
+                }
+            }
+
+            #inventoryDisplay {
+                td {
+                    padding: 10px 2px;
                 }
             }
         }
