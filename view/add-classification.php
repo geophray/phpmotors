@@ -1,6 +1,6 @@
 <?php
     // If the current user doesn't have a session set, is not logged in, or is not an admin, redirect to home view.
-    if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || $_SESSION['clientData']['clientLevel'] == 1) {
+    if(!isset($_SESSION['loggedin']) || !$_SESSION['loggedin'] || $_SESSION['clientData']['clientLevel'] < 2) {
         header('Location: /phpmotors/');
         exit;
     }
