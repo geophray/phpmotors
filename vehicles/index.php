@@ -19,20 +19,6 @@ $classifications = getClassifications();
 // Build the navigation menu
 $navList = buildNavMenu($classifications);
 
-// // Build the dynamic drop-down select list of classifications from the database.
-// $classificationList = '<select name="classificationId" id="classificationId" required>';
-// $classificationList .= '<option value="" disabled selected>--Please choose an option--</option>';
-// foreach ($classifications as $classification) {
-//     $classificationList .= "<option value='" . $classification['classificationId'] . "'";
-//     if(isset($classificationId)) {
-//         if($classificationId === $classification['classificationId']) {
-//             $classificationList .= " selected ";
-//         }
-//     }
-//     $classificationList .= ">" . $classification['classificationName'] . "</option>";
-// }
-// $classificationList .= '</select>';
-
 // Control structure for delivering views
 $action = filter_input(INPUT_POST, 'action', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK);
 if ($action == NULL){
@@ -129,6 +115,62 @@ switch ($action){
         // Convert the array to a JSON object and send it back 
         echo json_encode($inventoryArray); 
         break;
+    case 'mod': // Load the vehicle update view
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);  
+        $invInfo = getInvItemInfo($invId);
+        if(count($invInfo)<1){
+            $message = 'Sorry, no vehicle information could be found.';
+        }
+        include '../view/vehicle-update.php';
+        exit;
+        break;
+    case 'update-vehicle': // Process the update vehicle form from vehicle-update.php view
+        // Filter and store the data
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $classificationId = filter_input(INPUT_POST, 'classificationId', FILTER_SANITIZE_NUMBER_INT);
+        $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+        $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+        $invDescription = filter_input(INPUT_POST, 'invDescription', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+        $invImage = filter_input(INPUT_POST, 'invImage', FILTER_SANITIZE_URL);
+        $invThumbnail = filter_input(INPUT_POST, 'invThumbnail', FILTER_SANITIZE_URL);
+        $invPrice = filter_input(INPUT_POST, 'invPrice', FILTER_SANITIZE_NUMBER_FLOAT , FILTER_FLAG_ALLOW_FRACTION);
+        $invStock = filter_input(INPUT_POST, 'invStock', FILTER_SANITIZE_NUMBER_INT);
+        $invColor = filter_input(INPUT_POST, 'invColor', FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+
+        // Validate the stored data
+        $classificationId = validateClassificationId($classificationId);
+        $invMake = validateStringRegex($invMake);
+        $invModel = validateInvModel($invModel);
+        $invImage = validateFilePath($invImage);
+        $invThumbnail = validateFilePath($invThumbnail);
+        $invPrice = validateInvPrice($invPrice);
+        $invStock = validateInvStock($invStock);
+        $invColor = validateStringRegex($invColor);
+
+        // Check for missing input
+        if(empty($classificationId) || empty($invMake) || empty($invModel) || empty($invDescription) || empty($invImage) || empty($invThumbnail) || empty($invPrice) || empty($invStock) || empty($invColor)) {
+            $message = "<p class='error-message'>Please provide information for all empty form fields.</p>";
+            // Return visitor to add-vehicle form to complete all fields.
+            include '../view/add-vehicle.php';
+            exit;
+        }
+
+        // Insert the data to the database
+        $updateResult = updateVehicle( $invId, $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId );
+
+        // Check and report the result
+        if ($updateResult === 1) {
+            $message = "<p class='success-message'>The $invMake $invModel was updated successfully!</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        } else {
+            $message = "<p class='error-message'>Update of $invMake $invModel failed.  Please try again.</p>";
+            include '../view/vehicle-update.php';
+            exit;
+        }
+
+        break; 
     default: // Load the vehicle management view
         $classificationList = buildClassificationList($classifications);
 

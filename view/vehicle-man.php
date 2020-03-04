@@ -4,6 +4,10 @@
         header('Location: /phpmotors/');
         exit;
     }
+    // Set the session message into the $message variable
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,3 +60,4 @@
 </body>
 
 </html>
+<?php unset($_SESSION['message']); ?>

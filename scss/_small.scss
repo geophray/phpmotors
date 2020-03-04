@@ -88,6 +88,18 @@ body {
                 border-radius: 5px;
             }
 
+            .modify:hover, .delete:hover {
+                background-color: $mediumGray;
+            }
+
+            .grow { 
+                transition: all .2s ease-in-out; 
+            }
+
+            .grow:hover { 
+                transform: scale(1.5); 
+            }
+
             .label {
                 font-weight: 600;
                 color: $primaryColor;
