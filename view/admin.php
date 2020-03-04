@@ -28,16 +28,27 @@
                     echo $_SESSION['clientData']['clientFirstname'] . " " . $_SESSION['clientData']['clientLastname'];
                 ?>
             </h1>
+            <?php
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
+            ?>
             <p>You are logged in.</p>
-            <ul>
+            <!-- <ul>
                 <li><span class="label">First Name:</span> <?php echo $_SESSION['clientData']['clientFirstname'] ?></li>
                 <li><span class="label">Last Name:</span> <?php echo $_SESSION['clientData']['clientLastname'] ?></li>
                 <li><span class="label">Email:</span> <?php echo $_SESSION['clientData']['clientEmail'] ?></li>
                 <li><span class="label">Client Level:</span> <?php echo $_SESSION['clientData']['clientLevel'] ?></li>
-            </ul>
+            </ul> -->
+            <p><a href='/phpmotors/accounts/index.php?action=update-account-info'>Update Account Information</a></p>
             <?php
                 if($_SESSION['clientData']['clientLevel'] > 1) {
-                    echo "<p><a href='/phpmotors/vehicles/'>Vehicle Management</a></p>";
+                    echo "
+                        <h2>Manage Inventory</h2>
+                        <p>Use the following link to manage current inventory and vehicle classifications.</p>
+                        <p>
+                            <a href='/phpmotors/vehicles/'>Vehicle Management</a>
+                        </p>";
                 }
             ?>
         </main>
