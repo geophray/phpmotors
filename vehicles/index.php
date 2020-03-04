@@ -171,6 +171,37 @@ switch ($action){
         }
 
         break; 
+    case 'del': // Load the vehicle deletion view.
+        $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);  
+        $invInfo = getInvItemInfo($invId);
+        if(count($invInfo)<1){
+            $message = 'Sorry, no vehicle information could be found.';
+        }
+        include '../view/vehicle-delete.php';
+        exit;
+        break;
+    case 'delete-vehicle': // Process deletion of vehicle.
+        // Filter and store the data
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $invMake = filter_input(INPUT_POST, 'invMake', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+        $invModel = filter_input(INPUT_POST, 'invModel', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+
+        // Insert the data to the database
+        $deleteResult = deleteVehicle( $invId );
+
+        // Check and report the result
+        if ($deleteResult === 1) {
+            $message = "<p class='success-message'>$invMake $invModel was deleted successfully!</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        } else {
+            $message = "<p class='error-message'>$invMake $invModel could not be deleted.</p>";
+            $_SESSION['message'] = $message;
+            header('location: /phpmotors/vehicles/');
+            exit;
+        }
+        break;
     default: // Load the vehicle management view
         $classificationList = buildClassificationList($classifications);
 

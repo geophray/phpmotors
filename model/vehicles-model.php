@@ -80,7 +80,7 @@ function getInvItemInfo($invId){
     return $invInfo;
 }
 
-//Function to handle updating of new vehicles.
+//Function to handle updating of vehicles.
 function updateVehicle( $invId, $invMake, $invModel, $invDescription, $invImage, $invThumbnail, $invPrice, $invStock, $invColor, $classificationId ) {
     // Create a connection object using the phpmotors connection function
    $db = phpmotorsConnect();
@@ -103,9 +103,31 @@ function updateVehicle( $invId, $invMake, $invModel, $invDescription, $invImage,
    $stmt->bindValue(':invStock', $invStock, PDO::PARAM_INT);
    $stmt->bindValue(':invColor', $invColor, PDO::PARAM_STR);
    $stmt->bindValue(':classificationId', $classificationId, PDO::PARAM_INT);
-   // Insert the data
+   // Update the data
    $stmt->execute();
-   // Ask how many rows changed as a result of our insert
+   // Ask how many rows changed as a result of our update
+   $rowsChanged = $stmt->rowCount();
+   // Close the database interaction
+   $stmt->closeCursor();
+   // Return the indication of success (rows changed)
+   return $rowsChanged;
+}
+
+//Function to handle deletion of vehicles.
+function deleteVehicle( $invId ) {
+    // Create a connection object using the phpmotors connection function
+   $db = phpmotorsConnect();
+   // The SQL statement
+   $sql = 'DELETE FROM inventory WHERE invId = :invId';
+   // Create the prepared statement using the phpmotors connection
+   $stmt = $db->prepare($sql);
+   // The next line replaces the placeholder in the SQL
+   // statement with the actual value in the variable
+   // and tells the database the type of data it is
+   $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+   // Delete the data
+   $stmt->execute();
+   // Ask how many rows changed as a result of our deletion
    $rowsChanged = $stmt->rowCount();
    // Close the database interaction
    $stmt->closeCursor();
