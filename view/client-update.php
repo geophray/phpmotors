@@ -37,6 +37,11 @@
             ?>
             <section>
                 <h2>Update Account Information</h2>
+                <?php
+                    if (isset($accountMessage)) {
+                        echo $accountMessage;
+                    }
+                ?>
                 <form id="signin" class="user-management" method="post" action="/phpmotors/accounts/index.php">
                     <div>
                         <label for="clientFirstname">First Name</label>
@@ -64,6 +69,11 @@
             </section>
             <section>
                 <h2>Change Password</h2>
+                <?php
+                    if (isset($passwordMessage)) {
+                        echo $passwordMessage;
+                    }
+                ?>
                 <form id="signin" class="user-management" method="post" action="/phpmotors/accounts/index.php">
                     <div>
                         <label for="oldClientPassword">Old Password</label>
@@ -74,7 +84,7 @@
                         <label for="newClientPassword">New Password</label>
                         <input type="password" id="newClientPassword" name="newClientPassword" required
                             pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$">
-                        <span class="fine-print">Must be at least 8 characters and contain at least 1 number, 1 capital
+                        <span class="fine-print">Submitting this form will change the password for your account. New password must be at least 8 characters and contain at least 1 number, 1 capital
                             letter, and 1 special character.</span>
                     </div>
                     <div>
