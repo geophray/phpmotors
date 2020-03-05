@@ -38,6 +38,10 @@
             <section>
                 <h2>Update Account Information</h2>
                 <?php
+                    if (isset($_SESSION['accountMessage'])) {
+                        $accountMessage = $_SESSION['accountMessage'];
+                        unset($_SESSION['accountMessage']);
+                    }
                     if (isset($accountMessage)) {
                         echo $accountMessage;
                     }
@@ -70,6 +74,10 @@
             <section>
                 <h2>Change Password</h2>
                 <?php
+                    if (isset($_SESSION['passwordMessage'])) {
+                        $passwordMessage = $_SESSION['passwordMessage'];
+                        unset($_SESSION['passwordMessage']);
+                    }
                     if (isset($passwordMessage)) {
                         echo $passwordMessage;
                     }

@@ -63,3 +63,46 @@ function getClient($clientEmail){
     $stmt->closeCursor();
     return $clientData;
    }
+
+// Function for checking for existing email address in the db.
+function emailExistsInOtherAccount ( $email , $clientId) { 
+    // Create a connection object using the phpmotors connection function
+    $db = phpmotorsConnect();
+    // The SQL statement
+    $sql = 'SELECT clientEmail 
+            FROM clients 
+            WHERE clientEmail = :email AND clientId <> :clientId';
+    // Create the prepared statement using the phpmotors connection
+    $stmt = $db->prepare($sql);
+    // Bind the email variable to the placeholder in the sql statement
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+    // Run the statement
+    $stmt->execute();
+    $isMatch = $stmt->fetch(PDO::FETCH_NUM);
+    // Close db connection
+    $stmt->closeCursor();
+    // Check if sql statement returned a match
+    if(empty($isMatch)){
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
+//Function to handle updating of vehicles.
+function updateClient( $clientFirstname, $clientLastname, $clientEmail, $clientId ) {
+   $db = phpmotorsConnect();
+   $sql = 'UPDATE clients 
+            SET clientFirstname = :clientFirstname, clientLastname = :clientLastname, clientEmail = :clientEmail
+            WHERE clientId = :clientId';
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
+   $stmt->bindValue(':clientFirstname', $clientFirstname, PDO::PARAM_STR);
+   $stmt->bindValue(':clientLastname', $clientLastname, PDO::PARAM_STR);
+   $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+   $stmt->execute();
+   $rowsChanged = $stmt->rowCount();
+   $stmt->closeCursor();
+   return $rowsChanged;
+}

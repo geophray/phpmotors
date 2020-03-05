@@ -128,6 +128,60 @@ switch ($action){
         session_destroy();
         include '../index.php';
         break;
+    case 'update-account': // Loads the client-update.php view
+        include '../view/client-update.php';
+        exit;
+        break;
+    case 'process-account-changes': // Process account changes
+        // Filter and store the data
+        $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+        $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+        $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+
+        // Validate email on server side
+        $clientEmail = checkEmail($clientEmail);
+
+        // Check if email exists in clients database table
+        $accountExists = emailExistsInOtherAccount($clientEmail, $clientId);
+        if ( $accountExists ) {
+            $accountMessage = '<p class="error-message">There is already another account using the email ' . $clientEmail . '.</p>';
+            include '../view/client-update.php';
+            exit;
+        }
+
+        // Check for missing data
+        if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($clientId)){
+            $accountMessage = "<p class='error-message'>All form fields are required.</p>";
+            include '../view/client-update.php';
+            exit; 
+        }
+
+        // Insert the data to the database.
+        $updateResult = updateClient( $clientFirstname, $clientLastname, $clientEmail, $clientId );
+
+        // Check and report the result.
+        if ($updateResult === 1) {
+            setcookie("firstname", $clientFirstname, strtotime("+ 1 year"), "/");
+            $_SESSION['accountMessage'] = "<p class='success-message'>Account information updated successfully.</p>";
+            // Update clientData in the session.
+            $clientData = getClient($clientEmail);
+            array_pop($clientData);
+            $_SESSION['clientData'] = $clientData;
+            header('Location: /phpmotors/accounts/?action=update-account');
+            exit;
+        } else {
+            $accountMessage = "<p class='error-message'>Account update failed. Please try again.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
+
+        break;
+    case 'save-new-password': // Update client password
+        $passwordMessage = "<p class='success-message'>Password updated successfully.</p>";
+        include '../view/client-update.php';
+        exit;
+        break;
     default: // Load the admin view
         include '../view/admin.php';
         break;
