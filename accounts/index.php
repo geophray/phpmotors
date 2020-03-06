@@ -128,7 +128,7 @@ switch ($action){
         session_destroy();
         include '../index.php';
         break;
-    case 'update-account': // Loads the client-update.php view
+    case 'update-account-info': // Loads the client-update.php view
         include '../view/client-update.php';
         exit;
         break;
@@ -142,12 +142,14 @@ switch ($action){
         // Validate email on server side
         $clientEmail = checkEmail($clientEmail);
 
-        // Check if email exists in clients database table
-        $accountExists = emailExistsInOtherAccount($clientEmail, $clientId);
-        if ( $accountExists ) {
-            $accountMessage = '<p class="error-message">There is already another account using the email ' . $clientEmail . '.</p>';
-            include '../view/client-update.php';
-            exit;
+        if ($clientEmail !== $_SESSION['clientData']['clientEmail']) {
+            // Check if email exists in clients database table
+            $accountExists = emailExists($clientEmail);
+            if ( $accountExists ) {
+                $accountMessage = '<p class="error-message">There is already another account using the email ' . $clientEmail . '.</p>';
+                include '../view/client-update.php';
+                exit;
+            }
         }
 
         // Check for missing data
@@ -163,12 +165,12 @@ switch ($action){
         // Check and report the result.
         if ($updateResult === 1) {
             setcookie("firstname", $clientFirstname, strtotime("+ 1 year"), "/");
-            $_SESSION['accountMessage'] = "<p class='success-message'>Account information updated successfully.</p>";
+            $_SESSION['message'] = "<p class='success-message'>Account information updated successfully.</p>";
             // Update clientData in the session.
-            $clientData = getClient($clientEmail);
+            $clientData = getClient($clientId);
             array_pop($clientData);
             $_SESSION['clientData'] = $clientData;
-            header('Location: /phpmotors/accounts/?action=update-account');
+            header('Location: /phpmotors/accounts/');
             exit;
         } else {
             $accountMessage = "<p class='error-message'>Account update failed. Please try again.</p>";
@@ -178,9 +180,53 @@ switch ($action){
 
         break;
     case 'save-new-password': // Update client password
-        $passwordMessage = "<p class='success-message'>Password updated successfully.</p>";
-        include '../view/client-update.php';
-        exit;
+        // Filter and store the data
+        $oldClientPassword = filter_input(INPUT_POST, 'oldClientPassword', FILTER_SANITIZE_STRING);
+        $newClientPassword = filter_input(INPUT_POST, 'newClientPassword', FILTER_SANITIZE_STRING);
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+
+        // Validate password on server side
+        $checkNewPassword = checkPassword($newClientPassword);
+
+        // Check for missing data
+        if(empty($clientId) || empty($oldClientPassword) || empty($checkNewPassword)){
+            $message = "<p class='error-message'>Please enter a valid password.</p>";
+            include '../view/client-update.php';
+            exit; 
+        }
+
+        // A valid password exists, proceed with the update process
+        // Query the client data based on the clientId
+        $clientData = getClientById($clientId);
+        // Compare the password just submitted against
+        // the hashed password for the matching client
+        $hashCheck = password_verify($oldClientPassword, $clientData['clientPassword']);
+        
+        // If the hashes don't match on old password create an error
+        // and return to the client update view
+        if(!$hashCheck) {
+            $passwordMessage = "<p class='error-message'>Update failed. Please check your old password and try again.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
+
+        // Hash the checked new password
+        $hashedPassword = password_hash($newClientPassword, PASSWORD_DEFAULT);
+
+        // Insert the data to the database.
+        $passwordUpdateResult = updatePassword( $clientId, $hashedPassword );
+
+        // Check and report the result.
+        if ($passwordUpdateResult === 1) {
+            setcookie("firstname", $clientFirstname, strtotime("+ 1 year"), "/");
+            $_SESSION['message'] = "<p class='success-message'>Password updated successfully.</p>";
+            header('Location: /phpmotors/accounts/');
+            exit;
+        } else {
+            $passwordMessage = "<p class='error-message'>Password update failed. Please try again.</p>";
+            include '../view/client-update.php';
+            exit;
+        }
         break;
     default: // Load the admin view
         include '../view/admin.php';
