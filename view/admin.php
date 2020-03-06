@@ -30,8 +30,12 @@
             </h1>
             <?php
                 if (isset($_SESSION['message'])) {
-                    echo $_SESSION['message'];
+                    $message = $_SESSION['message'];
                 }
+                if (isset($message)) {
+                    echo $message;
+                }
+                unset($_SESSION['message']);
             ?>
             <p>You are logged in.</p>
             <!-- <ul>

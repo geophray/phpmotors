@@ -55,11 +55,14 @@
                     } 
                 ?>
             </h1>
-
             <?php
+                if (isset($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
+                }
                 if (isset($message)) {
                     echo $message;
                 }
+                unset($_SESSION['message']);
             ?>
             <p class="error-message">Confirm Vehicle Deletion. This cannot be undone.</p>
             <form id="signin" class="user-management" action="/phpmotors/vehicles/index.php" method="post">

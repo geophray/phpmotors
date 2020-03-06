@@ -34,9 +34,14 @@
                 <li><a href="../vehicles/index.php?action=new-vehicle">Add Vehicle</a></li>
             </ul>
             <?php
-                if (isset($message)) { 
-                    echo $message; 
-                } 
+                if (isset($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
+                }
+                if (isset($message)) {
+                    echo $message;
+                }
+                unset($_SESSION['message']);
+
                 if (isset($classificationList)) { 
                     echo '<h2>Vehicles By Classification</h2>'; 
                     echo '<p>Choose a classification to see those vehicles</p>'; 
@@ -60,4 +65,3 @@
 </body>
 
 </html>
-<?php unset($_SESSION['message']); ?>

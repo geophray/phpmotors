@@ -19,10 +19,15 @@
         <main>
             <h1>Create an account with PHP Motors!</h1>
 
+            
             <?php
+                if (isset($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
+                }
                 if (isset($message)) {
                     echo $message;
                 }
+                unset($_SESSION['message']);
             ?>
 
             <form id="signin" class="user-management" method="post" action="/phpmotors/accounts/index.php">

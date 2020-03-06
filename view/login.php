@@ -22,8 +22,12 @@
 
             <?php
                 if (isset($_SESSION['message'])) {
-                    echo $_SESSION['message'];
+                    $message = $_SESSION['message'];
                 }
+                if (isset($message)) {
+                    echo $message;
+                }
+                unset($_SESSION['message']);
             ?>
 
             <form id="signin" class="user-management" action="/phpmotors/accounts/" method="post">

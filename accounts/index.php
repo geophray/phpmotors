@@ -167,7 +167,7 @@ switch ($action){
             setcookie("firstname", $clientFirstname, strtotime("+ 1 year"), "/");
             $_SESSION['message'] = "<p class='success-message'>Account information updated successfully.</p>";
             // Update clientData in the session.
-            $clientData = getClient($clientId);
+            $clientData = getClientById($clientId);
             array_pop($clientData);
             $_SESSION['clientData'] = $clientData;
             header('Location: /phpmotors/accounts/');

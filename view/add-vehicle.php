@@ -38,11 +38,14 @@
         </nav>
         <main>
             <h1>Add New Vehicle</h1>
-
             <?php
+                if (isset($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
+                }
                 if (isset($message)) {
                     echo $message;
                 }
+                unset($_SESSION['message']);
             ?>
             <p>*Note all Fields are Required</p>
             <form id="signin" class="user-management" action="/phpmotors/vehicles/index.php" method="post">
