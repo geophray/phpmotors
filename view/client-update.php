@@ -46,7 +46,7 @@
                         echo $accountMessage;
                     }
                 ?>
-                <form id="signin" class="user-management" method="post" action="/phpmotors/accounts/index.php">
+                <form id="update-account" class="user-management" method="post" action="/phpmotors/accounts/index.php">
                     <div>
                         <label for="clientFirstname">First Name</label>
                         <input type="text" id="clientFirstname" name="clientFirstname"
@@ -82,7 +82,7 @@
                         echo $passwordMessage;
                     }
                 ?>
-                <form id="signin" class="user-management" method="post" action="/phpmotors/accounts/index.php">
+                <form id="update-password" class="user-management" method="post" action="/phpmotors/accounts/index.php">
                     <div>
                         <label for="oldClientPassword">Old Password</label>
                         <input type="password" id="oldClientPassword" name="oldClientPassword" required
