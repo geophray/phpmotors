@@ -25,7 +25,7 @@
                     <p class="no-margin">Superman doors</p>
                     <p class="no-margin">Fuzzy dice!</p>
                 </div>
-                <img src="/phpmotors/images/delorean.jpg" alt="Rendering of the actual Delorean.">
+                <img src="/phpmotors/images/vehicles/delorean.jpg" alt="Rendering of the actual Delorean.">
                 <img id="own_today_button" src="/phpmotors/images/site/own_today.png" alt="Own today button.">
             </section>
             <div id="reviews_upgrades">
