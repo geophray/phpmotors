@@ -1,232 +1,257 @@
-body {
-    .site-wrapper {
-        max-width: 1200px;
-        background: $white;
-        font-family: $bodyFontFamily;
+html {
+    box-sizing: border-box;
+    body {
+        .site-wrapper {
+            max-width: 1200px;
+            background: $white;
+            font-family: $bodyFontFamily;
 
-        .no-margin {
-            margin: 0;
-        }
-
-        .blue-text {
-            color: $primaryColor;
-        }
-
-        header {
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-
-            span {
-                padding: 1.2em;
-            }
-        }
-
-        nav {
-            background: $darkGray;
-
-            ul {
-                display: flex;
-                flex-flow: row nowrap;
-                justify-content: flex-start;
-                list-style: none;
-                padding-left: 5px;
-
-                li {
-                    a {
-                        padding: 1.2em .4em;
-                        text-decoration: none;
-                        color: $white;
-                        display: block;
-                    }
-
-                    a:hover {
-                        color: $darkGray;
-                        background: $primaryColor;
-                        margin: -.2em 0 -.2em 0;
-                        padding: 1.4em 1.2em;
-                    }
-                }
-            }
-        }
-
-        main {
-            padding: 0 1em 2em 1em;
-
-            h1,
-            h2 {
-                font-size: 1.1em;
+            .no-margin {
+                margin: 0;
             }
 
-            .error-message {
-                color: red;
-                font-size: larger;
-                font-style: italic;
-                font-weight: 600;
-            }
-            .success-message {
-                color: green;
-                font-size: larger;
-                font-style: italic;
-                font-weight: 600;
-            }
-
-            .modify {
-                background-color: $primaryColor;
-                color: $white;
-            }
-
-            .delete {
-                background-color: red;
-                color: $white;
-            }
-
-            .modify, .delete {
-                padding: 5px;
-                text-decoration: none;
-                border-radius: 5px;
-            }
-
-            .modify:hover, .delete:hover {
-                background-color: $mediumGray;
-            }
-
-            .grow { 
-                transition: all .2s ease-in-out; 
-            }
-
-            .grow:hover { 
-                transform: scale(1.5); 
-            }
-
-            .label {
-                font-weight: 600;
+            .blue-text {
                 color: $primaryColor;
             }
-        
-            #own_a_delo_today {
+
+            header {
                 display: flex;
-                flex-flow: column nowrap;
+                flex-flow: row nowrap;
+                justify-content: space-between;
                 align-items: center;
-                position: relative;
 
-                img {
-                    max-width: 100%;
+                span {
+                    padding: 1.2em;
                 }
-
-                #delo_description {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    font-size: 0.8em;
-                }
-
-                .absolute-margin {
-                    margin-left: 0.5em;
-                }
-
-                #own_today_button {
-                    margin-top: 2em;
-                    max-width: 50%;
-                }
-
             }
 
-            #delo_reviews {
+            nav {
+                background: $darkGray;
+
                 ul {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: flex-start;
+                    list-style: none;
+                    padding-left: 5px;
+
                     li {
-                        margin-bottom: 1em;
+                        a {
+                            padding: 1.2em .4em;
+                            text-decoration: none;
+                            color: $white;
+                            display: block;
+                        }
+
+                        a:hover {
+                            color: $darkGray;
+                            background: $primaryColor;
+                            margin: -.2em 0 -.2em 0;
+                            padding: 1.4em 1.2em;
+                        }
                     }
                 }
             }
 
-            .delo-upgrades {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 20px 10px;
+            main {
+                padding: 0 1em 2em 1em;
 
-                img {
-                    background: $primaryColor;
-                    object-fit: contain;
-                    width: 100%;
-                    height: 100px;
-                    border: 1px solid $darkGray;
+                h1,
+                h2 {
+                    font-size: 1.1em;
                 }
 
-                .delo-upgrade {
+                .error-message {
+                    color: red;
+                    font-size: larger;
+                    font-style: italic;
+                    font-weight: 600;
+                }
+                .success-message {
+                    color: green;
+                    font-size: larger;
+                    font-style: italic;
+                    font-weight: 600;
+                }
+
+                .modify {
+                    background-color: $primaryColor;
+                    color: $white;
+                }
+
+                .delete {
+                    background-color: red;
+                    color: $white;
+                }
+
+                .modify, .delete {
+                    padding: 5px;
+                    text-decoration: none;
+                    border-radius: 5px;
+                }
+
+                .modify:hover, .delete:hover {
+                    background-color: $mediumGray;
+                }
+
+                .grow { 
+                    transition: all .3s ease-in-out; 
+                }
+
+                .grow:hover { 
+                    transform: scale(1.1); 
+                }
+
+                .label {
+                    font-weight: 600;
+                    color: $primaryColor;
+                }
+            
+                #own_a_delo_today {
                     display: flex;
                     flex-flow: column nowrap;
                     align-items: center;
+                    position: relative;
 
-                    h3 {
-                        margin: 0;
-                        font-size: 1em;
+                    img {
+                        max-width: 100%;
+                    }
+
+                    #delo_description {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        font-size: 0.8em;
+                    }
+
+                    .absolute-margin {
+                        margin-left: 0.5em;
+                    }
+
+                    #own_today_button {
+                        margin-top: 2em;
+                        max-width: 50%;
+                    }
+
+                }
+
+                #delo_reviews {
+                    ul {
+                        li {
+                            margin-bottom: 1em;
+                        }
+                    }
+                }
+
+                .delo-upgrades {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px 10px;
+
+                    img {
+                        background: $primaryColor;
+                        object-fit: contain;
+                        width: 100%;
+                        height: 100px;
+                        border: 1px solid $darkGray;
+                    }
+
+                    .delo-upgrade {
+                        display: flex;
+                        flex-flow: column nowrap;
+                        align-items: center;
+
+                        h3 {
+                            margin: 0;
+                            font-size: 1em;
+                        }
+                    }
+                }
+
+                form.user-management {
+                    div {
+                        display: flex;
+                        flex-flow: column nowrap;
+                        margin: 0 0 25px 0;
+                        max-width: 500px;
+                        label {
+                            font-size: 1.2em;
+                            color: $mediumGray;
+                            margin: 0 0 5px 0;
+                        }
+                        input:focus:invalid {
+                            border: 2px solid rgba(255, 0, 0, 0.5);
+                            box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.5);
+                        }
+                        select {
+                            -webkit-appearance: none;
+                            -moz-appearance: none;
+                            appearance: none;
+                        }
+                        input, textarea, select {
+                            padding: 10px;
+                            border-radius: 5px;
+                            border: 1px solid $primaryColorLight;
+                        }
+                        input:valid {
+                            background-color: rgba(117, 255, 124, 0.1);
+                        }
+                        input[type=submit] {
+                            color: $white;
+                            background-color: $primaryColor;
+                            font-size: 1.2em;
+                            transition: all 0.5s ease;
+                        }
+                        input[type=submit]:hover {
+                            color: $primaryColor;
+                            background-color: $white;
+                            box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.75);
+                        }
+                        .fine-print {
+                            font-size: 0.75em;
+                            font-style: italic;
+                            color: $primaryColor;
+                        }
+                    }
+                }
+
+                #inventoryDisplay {
+                    td {
+                        padding: 10px 2px;
+                    }
+                }
+
+                /* May want to adjust these CSS rules. Was added in weekly activity, but I don't like how it is done. */
+                #inv-display{
+                    margin: 0;
+                    padding: 0;
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                    gap: 1em;
+                    li{
+                        border: 1px $primaryColorLight solid;
+                        list-style-type: none;
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                            border-bottom: 1px $primaryColorLight solid;
+                        }
+                        .vehicle-details {
+                            padding: 1em;
+                            justify-self: end;
+                        }
                     }
                 }
             }
 
-            form.user-management {
-                div {
-                    display: flex;
-                    flex-flow: column nowrap;
-                    margin: 0 0 25px 0;
-                    max-width: 500px;
-                    label {
-                        font-size: 1.2em;
-                        color: $mediumGray;
-                        margin: 0 0 5px 0;
-                    }
-                    input:focus:invalid {
-                        border: 2px solid rgba(255, 0, 0, 0.5);
-                        box-shadow: 0px 0px 10px 0px rgba(255, 0, 0, 0.5);
-                    }
-                    select {
-                        -webkit-appearance: none;
-                        -moz-appearance: none;
-                        appearance: none;
-                    }
-                    input, textarea, select {
-                        padding: 10px;
-                        border-radius: 5px;
-                        border: 1px solid $primaryColorLight;
-                    }
-                    input:valid {
-                        background-color: rgba(117, 255, 124, 0.1);
-                    }
-                    input[type=submit] {
-                        color: $white;
-                        background-color: $primaryColor;
-                        font-size: 1.2em;
-                        transition: all 0.5s ease;
-                    }
-                    input[type=submit]:hover {
-                        color: $primaryColor;
-                        background-color: $white;
-                        box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.75);
-                    }
-                    .fine-print {
-                        font-size: 0.75em;
-                        font-style: italic;
-                        color: $primaryColor;
-                    }
+            footer {
+                text-align: center;
+                padding: 1em;
+                border-top: 4px solid $darkGray;
+
+                p {
+                    margin: 0;
                 }
-            }
-
-            #inventoryDisplay {
-                td {
-                    padding: 10px 2px;
-                }
-            }
-        }
-
-        footer {
-            text-align: center;
-            padding: 1em;
-            border-top: 4px solid $darkGray;
-
-            p {
-                margin: 0;
             }
         }
     }

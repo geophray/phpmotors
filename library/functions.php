@@ -113,11 +113,12 @@ function buildClassificationList($classifications){
 function buildVehiclesDisplay($vehicles){
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
-     $dv .= '<li>';
+     $dv .= '<li class="grow">';
      $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
-     $dv .= '<hr>';
+     $dv .= '<div class="vehicle-details">';
      $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
      $dv .= "<span>$vehicle[invPrice]</span>";
+     $dv .= '</div>';
      $dv .= '</li>';
     }
     $dv .= '</ul>';
