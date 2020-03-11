@@ -202,6 +202,16 @@ switch ($action){
             exit;
         }
         break;
+    case 'classification': // Loads all vehicles of a selected classification
+        $classificationName = filter_input(INPUT_GET, 'classificationName', FILTER_SANITIZE_STRING);
+        $vehicles = getVehiclesByClassification($classificationName);
+        if(!count($vehicles)){
+            $message = "<p class='error-message'>Sorry, no $classificationName vehicles could be found.</p>";
+        } else {
+            $vehicleDisplay = buildVehiclesDisplay($vehicles);
+        }
+        include '../view/classification.php';
+        break;
     default: // Load the vehicle management view
         $classificationList = buildClassificationList($classifications);
 
