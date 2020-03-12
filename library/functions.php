@@ -114,13 +114,36 @@ function buildVehiclesDisplay($vehicles){
     $dv = '<ul id="inv-display">';
     foreach ($vehicles as $vehicle) {
      $dv .= '<li class="grow">';
+     $dv .= "<a href='/phpmotors/vehicles/?action=vehicle&invId=$vehicle[invId]'>";
      $dv .= "<img src='$vehicle[invThumbnail]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
      $dv .= '<div class="vehicle-details">';
      $dv .= "<h2>$vehicle[invMake] $vehicle[invModel]</h2>";
-     $dv .= "<span>$vehicle[invPrice]</span>";
+     $dv .= '<span class="vehicle-price">' . formatCurrencyUSD($vehicle['invPrice']) . '</span>';
      $dv .= '</div>';
+     $dv .= '</a>';
      $dv .= '</li>';
     }
     $dv .= '</ul>';
     return $dv;
+}
+
+// Function to build a display for a single vehicle to be displayed on the vehicle-details view.
+function buildVehicleDisplay($vehicle){
+    $dv = "<h1>$vehicle[invMake] $vehicle[invModel]</h1>";
+    $dv .= "<img class='full-width' src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+    $dv .= '<h2 class="vehicle-price">Price: ' . formatCurrencyUSD($vehicle['invPrice']) . '</h2>';
+    $dv .= "<section>";
+    $dv .= "<h2>$vehicle[invMake] $vehicle[invModel] Details</h2>";
+    $dv .= "<h3>Description</h3><p id='vehicle-description'>$vehicle[invDescription]</p>";
+    $dv .= "<h3>Colors Available</h3><p id='vehicle-color'>$vehicle[invColor]</p>";
+    $dv .= "<h3>QTY in Stock</h3><p id='vehicle-qty-in-stock'>$vehicle[invStock]</p>";
+    $dv .= "</section>";
+    return $dv;
+}
+
+// Funciton for formatting prices to US currency
+function formatCurrencyUSD($price) {
+    $formattedCurrency = number_format($price, 0, '.', ',');
+    $formattedCurrency = '$' . $formattedCurrency;
+    return $formattedCurrency;
 }

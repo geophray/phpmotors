@@ -55,10 +55,9 @@ html {
 
             main {
                 padding: 0 1em 2em 1em;
-
-                h1,
-                h2 {
-                    font-size: 1.1em;
+                
+                h3 {
+                    color: $primaryColor;
                 }
 
                 .error-message {
@@ -99,12 +98,16 @@ html {
                 }
 
                 .grow:hover { 
-                    transform: scale(1.1); 
+                    transform: scale(1.05); 
                 }
 
                 .label {
                     font-weight: 600;
                     color: $primaryColor;
+                }
+
+                .full-width {
+                    width: 100%;
                 }
             
                 #own_a_delo_today {
@@ -221,7 +224,6 @@ html {
                     }
                 }
 
-                /* May want to adjust these CSS rules. Was added in weekly activity, but I don't like how it is done. */
                 #inv-display{
                     margin: 0;
                     padding: 0;
@@ -231,14 +233,21 @@ html {
                     li{
                         border: 1px $primaryColorLight solid;
                         list-style-type: none;
-                        img {
-                            width: 100%;
-                            object-fit: cover;
-                            border-bottom: 1px $primaryColorLight solid;
-                        }
-                        .vehicle-details {
-                            padding: 1em;
-                            justify-self: end;
+                        a {
+                            color: $primaryColor;
+                            text-decoration: none;
+                            img {
+                                width: 100%;
+                                object-fit: cover;
+                                border-bottom: 1px $primaryColorLight solid;
+                            }
+                            .vehicle-details {
+                                padding: 1em;
+                                justify-self: end;
+                                .vehicle-price {
+                                    color: $mediumGray;
+                                }
+                            }
                         }
                     }
                 }

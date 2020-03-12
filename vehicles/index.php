@@ -212,6 +212,18 @@ switch ($action){
         }
         include '../view/classification.php';
         break;
+    case 'vehicle': // Loads details of an individual vehicle in the vehicles view
+        $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $vehicle = getVehicleById($invId);
+        if(!$vehicle) {
+            $message = "<p class='error-message'>Sorry mate... vehicle $invId could not be found.</p>";
+            include '../view/vehicle-detail.php';
+            exit;
+        } else {
+            $vehicleDisplay = buildVehicleDisplay($vehicle);
+            include '../view/vehicle-detail.php';
+        }
+        break;
     default: // Load the vehicle management view
         $classificationList = buildClassificationList($classifications);
 
