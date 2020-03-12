@@ -214,7 +214,7 @@ switch ($action){
         break;
     case 'vehicle': // Loads details of an individual vehicle in the vehicles view
         $invId = filter_input(INPUT_GET, 'invId', FILTER_SANITIZE_NUMBER_INT);
-        $vehicle = getVehicleById($invId);
+        $vehicle = getInvItemInfo($invId);
         if(!$vehicle) {
             $message = "<p class='error-message'>Sorry mate... vehicle $invId could not be found.</p>";
             include '../view/vehicle-detail.php';
