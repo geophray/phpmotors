@@ -150,7 +150,7 @@ function getVehiclesByClassification($classificationName){
 // Function to get a vehicle by invId
 function getVehicleById($invId){
     $db = phpmotorsConnect();
-    $sql = 'SELECT * FROM inventory WHERE classificationId = :invId';
+    $sql = 'SELECT * FROM inventory WHERE invId = :invId';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->execute();

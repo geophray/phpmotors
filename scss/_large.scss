@@ -1,0 +1,32 @@
+html {
+    body {
+        .site-wrapper {
+            #vehicle-details-wrapper {
+                display: grid;
+                grid-template-areas:
+                    "heading heading heading"
+                    "image image price"
+                    "image image details";
+                grid-template-rows: 1fr 1fr 4fr;
+                gap: 15px;
+            
+                h1 {
+                    grid-area: heading;
+                }
+            
+                img {
+                    grid-area: image;
+                }
+            
+                h2.vehicle-price {
+                    grid-area: price;
+                }
+            
+                section#vehicle-details {
+                    grid-area: details;
+                }
+            }
+        }
+    }
+}
+

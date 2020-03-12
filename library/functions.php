@@ -130,9 +130,9 @@ function buildVehiclesDisplay($vehicles){
 // Function to build a display for a single vehicle to be displayed on the vehicle-details view.
 function buildVehicleDisplay($vehicle){
     $dv = "<h1>$vehicle[invMake] $vehicle[invModel]</h1>";
-    $dv .= "<img class='full-width' src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
+    $dv .= "<img class='vehicle-full-size' src='$vehicle[invImage]' alt='Image of $vehicle[invMake] $vehicle[invModel] on phpmotors.com'>";
     $dv .= '<h2 class="vehicle-price">Price: ' . formatCurrencyUSD($vehicle['invPrice']) . '</h2>';
-    $dv .= "<section>";
+    $dv .= "<section id='vehicle-details'>";
     $dv .= "<h2>$vehicle[invMake] $vehicle[invModel] Details</h2>";
     $dv .= "<h3>Description</h3><p id='vehicle-description'>$vehicle[invDescription]</p>";
     $dv .= "<h3>Colors Available</h3><p id='vehicle-color'>$vehicle[invColor]</p>";

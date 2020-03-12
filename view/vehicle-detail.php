@@ -16,7 +16,7 @@
         <nav>
             <?php echo $navList; ?>
         </nav>
-        <main>
+        <main id="vehicle-details-wrapper">
             <?php 
                 if(isset($message)){
                     echo $message; 
