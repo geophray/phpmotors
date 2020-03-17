@@ -19,12 +19,26 @@ function insertReview($reviewText, $reviewDate, $invId, $clientId) {
 
 // Get reviews for a specific inventory item
 function getReviewsByInvId($invId) {
-
+    $db = phpmotorsConnect(); 
+    $sql = ' SELECT * FROM reviews WHERE invId = :invId'; 
+    $stmt = $db->prepare($sql); 
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT); 
+    $stmt->execute(); 
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    $stmt->closeCursor(); 
+    return $reviews; 
 }
 
 // Get reviews written by a specific client
 function getReviewsByClientId($clientId) {
-
+    $db = phpmotorsConnect(); 
+    $sql = ' SELECT * FROM reviews WHERE clientId = :clientId'; 
+    $stmt = $db->prepare($sql); 
+    $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT); 
+    $stmt->execute(); 
+    $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    $stmt->closeCursor(); 
+    return $reviews; 
 }
 
 // Get a specific review
@@ -34,9 +48,9 @@ function getReviewById($reviewId) {
     $stmt = $db->prepare($sql); 
     $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT); 
     $stmt->execute(); 
-    $inventory = $stmt->fetch(PDO::FETCH_ASSOC); 
+    $review = $stmt->fetch(PDO::FETCH_ASSOC); 
     $stmt->closeCursor(); 
-    return $inventory; 
+    return $review; 
 }
 
 // Update a specific review
