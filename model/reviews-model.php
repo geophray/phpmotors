@@ -71,5 +71,12 @@ function updateReview($reviewId, $reviewText) {
 
 // Delete a specific review
 function deleteReview($reviewId) {
-
+   $db = phpmotorsConnect();
+   $sql = 'DELETE FROM reviews WHERE reviewId = :reviewId';
+   $stmt = $db->prepare($sql);
+   $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
+   $stmt->execute();
+   $rowsChanged = $stmt->rowCount();
+   $stmt->closeCursor();
+   return $rowsChanged;
 }
