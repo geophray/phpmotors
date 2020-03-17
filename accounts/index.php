@@ -12,6 +12,8 @@ require_once '../model/main-model.php';
 require_once '../model/accounts-model.php';
 // Get the custom functions library
 require_once '../library/functions.php';
+// Get the PHP Motors reviews model
+require_once '../model/reviews-model.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
