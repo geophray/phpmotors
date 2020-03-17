@@ -51,8 +51,8 @@
                     </div>
                     <!-- Add the action name - value pair -->
                     <input type="hidden" name="action" value="add-review">
-                    <input type="hidden" name="invId" value="">
-                    <input type="hidden" name="clientId" value="">
+                    <input type="hidden" name="invId" value="<?php echo $invId ?>">
+                    <input type="hidden" name="clientId" value="<?php echo $_SESSION['clientData']['clientId'] ?>">
                 </form>
                 <?php
                     } else {
