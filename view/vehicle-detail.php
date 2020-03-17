@@ -18,15 +18,55 @@
         </nav>
         <main id="vehicle-details-wrapper">
             <?php 
-                if(isset($message)){
-                    echo $message; 
+                if (isset($_SESSION['message'])) {
+                    $message = $_SESSION['message'];
                 }
-            ?>
-            <?php 
+                if (isset($message)) {
+                    echo $message;
+                }
+                unset($_SESSION['message']);
+                
                 if(isset($vehicleDisplay)){
                     echo $vehicleDisplay;
                 } 
             ?>
+            <section id="inventory_reviews">
+                <h2>Customer Reviews</h2>
+                <?php
+                    if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                        $screenName = generateScreenName($_SESSION['clientData']);
+                ?>
+                <h3>Review the <?php echo $vehicle['invMake'] . " " . $vehicle['invModel'] ?></h3>
+                <form id="review" class="user-management" action="/phpmotors/reviews/index.php" method="post">
+                    <div>
+                        <label for="screenName">Screen Name</label>
+                        <input type="text" <?php echo "value='$screenName'"  ?> id="screenName" name="screenName" readonly>
+                    </div>
+                    <div>
+                        <label for="reviewText">Description</label>
+                        <textarea rows=5 id="reviewText" name="reviewText" required></textarea>
+                    </div>
+                    <div>
+                        <input type="submit" name="submit" id="save-review" value="Submit Review">
+                    </div>
+                    <!-- Add the action name - value pair -->
+                    <input type="hidden" name="action" value="add-review">
+                    <input type="hidden" name="invId" value="">
+                    <input type="hidden" name="clientId" value="">
+                </form>
+                <?php
+                    } else {
+                        echo "<p>You must <a href='/phpmotors/accounts/?action=login'>login</a> to write a review.</p>";
+                        var_dump($_SESSION);
+                    }
+                    $invReviews = getReviewsByInvId($invId);
+                    if($invReviews) {
+                        // Build list of reviews with most recent at the top
+                    } else {
+                        echo "<p class='italicized-message'>Be the first to write a review.</p>";
+                    }
+                ?>
+            </section>
         </main>
         <footer>
             <?php include $_SERVER['DOCUMENT_ROOT'].'/phpmotors/common/footer.php'; ?>

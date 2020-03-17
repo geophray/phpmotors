@@ -147,3 +147,10 @@ function formatCurrencyUSD($price) {
     $formattedCurrency = '$' . $formattedCurrency;
     return $formattedCurrency;
 }
+
+// Function for generating a users screen name when leaving reviews
+function generateScreenName($client) {
+    $firstInitial = strtoupper(substr($client['clientFirstname'], 0, 1));
+    $lastName = ucfirst($client['clientLastname']);
+    return $firstInitial . $lastName;
+}
