@@ -109,7 +109,7 @@ switch ($action){
         // A valid user exists, log them in
         $_SESSION['loggedin'] = TRUE;
         // Reset the firstname cookie
-        setcookie("firstname", $clientData['clientFirstname'], strtotime("+ 1 year"), "/");
+        setcookie("firstname", $clientData['clientFirstname'], 1, "/");
         // Remove the password from the array
         // the array_pop function removes the last
         // element from an array
