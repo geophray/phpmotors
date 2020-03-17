@@ -29,7 +29,14 @@ function getReviewsByClientId($clientId) {
 
 // Get a specific review
 function getReviewById($reviewId) {
-
+    $db = phpmotorsConnect(); 
+    $sql = ' SELECT * FROM reviews WHERE reviewId = :reviewId'; 
+    $stmt = $db->prepare($sql); 
+    $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT); 
+    $stmt->execute(); 
+    $inventory = $stmt->fetch(PDO::FETCH_ASSOC); 
+    $stmt->closeCursor(); 
+    return $inventory; 
 }
 
 // Update a specific review
