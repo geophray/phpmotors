@@ -8,12 +8,14 @@ session_start();
 require_once '../library/connections.php';
 // Get the PHP Motors main model 
 require_once '../model/main-model.php';
+// Get the PHP Motors accounts model 
+require_once '../model/accounts-model.php';
 // Get the PHP Motors main model 
 require_once '../model/vehicles-model.php';
-// Get the custom functions library
-require_once '../library/functions.php';
 // Get the PHP Motors reviews model
 require_once '../model/reviews-model.php';
+// Get the custom functions library
+require_once '../library/functions.php';
 
 // Get the array of classifications
 $classifications = getClassifications();
@@ -53,7 +55,7 @@ switch ($action){
         $invImage = validateFilePath($invImage);
         $invThumbnail = validateFilePath($invThumbnail);
         $invPrice = validateInvPrice($invPrice);
-        $invStock = validateInvStock($invStock);
+        $invStock = validateInt($invStock);
         $invColor = validateStringRegex($invColor);
 
         // Check for missing input
@@ -146,7 +148,7 @@ switch ($action){
         $invImage = validateFilePath($invImage);
         $invThumbnail = validateFilePath($invThumbnail);
         $invPrice = validateInvPrice($invPrice);
-        $invStock = validateInvStock($invStock);
+        $invStock = validateInt($invStock);
         $invColor = validateStringRegex($invColor);
 
         // Check for missing input

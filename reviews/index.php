@@ -28,6 +28,28 @@ if ($action == NULL){
 
 switch ($action){
     case 'add-review': // Saves a new review to the database
+        $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+        $invId = filter_input(INPUT_POST, 'invId', FILTER_SANITIZE_NUMBER_INT);
+        $reviewText = filter_input(INPUT_POST, 'reviewText', FILTER_SANITIZE_STRING, FILTER_FLAG_ENCODE_LOW | FILTER_FLAG_ENCODE_HIGH | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+
+        $clientId = validateInt($clientId);
+        $invId = validateInt($invId);
+
+        if(empty($clientId) || empty($invId) || empty($reviewText)) {
+            $_SESSION['reviewMessage'] = "<p class='error-message'>There was an error submitting your review. Please try again.</p>";
+            header("Location: /phpmotors/vehicles/?action=vehicle&invId=$invId");
+            exit;
+        }
+
+        $reviewDate = time();
+
+        $addReview = insertReview($reviewText, $reviewDate, $invId, $clientId);
+
+        if ($addReview === 1) {
+            $_SESSION['reviewMessage'] = "<p class='success-message'>Thank you for submitting a review! It is displayed below.</p>";
+            header("Location: /phpmotors/vehicles/?action=vehicle&invId=$invId");
+            exit;
+        }
         // include 'view/template.php';
         break;
 

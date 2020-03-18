@@ -5,7 +5,7 @@
 function insertReview($reviewText, $reviewDate, $invId, $clientId) {
    $db = phpmotorsConnect();
    $sql = 'INSERT INTO reviews (reviewText, reviewDate, invId, clientId)
-       VALUES (:reviewText, :reviewDate, :invId, :clientId)';
+       VALUES (:reviewText, FROM_UNIXTIME(:reviewDate), :invId, :clientId)';
    $stmt = $db->prepare($sql);
    $stmt->bindValue(':reviewText', $reviewText, PDO::PARAM_STR);
    $stmt->bindValue(':reviewDate', $reviewDate, PDO::PARAM_INT);

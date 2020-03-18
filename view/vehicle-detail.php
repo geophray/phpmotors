@@ -37,6 +37,12 @@
                         $screenName = generateScreenName($_SESSION['clientData']);
                 ?>
                 <h3>Review the <?php echo $vehicle['invMake'] . " " . $vehicle['invModel'] ?></h3>
+                <?php 
+                    if (isset($_SESSION['reviewMessage'])) {
+                        echo $_SESSION['reviewMessage'];
+                    }
+                    unset($_SESSION['reviewMessage']);
+                ?>
                 <form id="review" class="user-management" action="/phpmotors/reviews/index.php" method="post">
                     <div>
                         <label for="screenName">Screen Name</label>
@@ -49,7 +55,7 @@
                     <div>
                         <input type="submit" name="submit" id="save-review" value="Submit Review">
                     </div>
-                    <!-- Add the action name - value pair -->
+                    <!-- Add the name - value pairs -->
                     <input type="hidden" name="action" value="add-review">
                     <input type="hidden" name="invId" value="<?php echo $invId ?>">
                     <input type="hidden" name="clientId" value="<?php echo $_SESSION['clientData']['clientId'] ?>">
@@ -57,11 +63,11 @@
                 <?php
                     } else {
                         echo "<p>You must <a href='/phpmotors/accounts/?action=login'>login</a> to write a review.</p>";
-                        var_dump($_SESSION);
                     }
                     $invReviews = getReviewsByInvId($invId);
                     if($invReviews) {
-                        // Build list of reviews with most recent at the top
+                        $reviews = buildInventoryReviewsList($invReviews);
+                        echo $reviews;
                     } else {
                         echo "<p class='italicized-message'>Be the first to write a review.</p>";
                     }

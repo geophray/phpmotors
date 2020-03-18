@@ -92,10 +92,10 @@ function validateFilePath($pathInput) {
         }
     }
 
-// Function for server side validation of classificationId.
-function validateInvStock($invStock) {
-    $valInvStock = filter_var($invStock, FILTER_VALIDATE_INT);
-    return $valInvStock;
+// Function for server side validation of integers.
+function validateInt($int) {
+    $valInt = filter_var($int, FILTER_VALIDATE_INT);
+    return $valInt;
 }
 
 // Build the classifications select list 
@@ -153,4 +153,22 @@ function generateScreenName($client) {
     $firstInitial = strtoupper(substr($client['clientFirstname'], 0, 1));
     $lastName = ucfirst($client['clientLastname']);
     return $firstInitial . $lastName;
+}
+
+// Function for generating existing reviews on the vehicle-detail view
+function buildInventoryReviewsList($invReviews) {
+    $reviews = "<div class='all-reviews'>";
+    foreach ($invReviews as $singleReview) {
+        $reviews .= '<div class="single-review">';
+        $client = getClientById($singleReview['clientId']);
+        $screenName = generateScreenName($client);
+
+        // date_default_timezone_set('UTC');
+        $reviewDate =  date ("d F, Y", strtotime($singleReview['reviewDate'])); 
+        $reviews .= "<h3>$screenName <span class='review-meta'>wrote on $reviewDate:</span></h3>";
+        $reviews .= "<p>$singleReview[reviewText]</p>";
+        $reviews .= '</div>';
+       }
+    $reviews .= "</div>";
+    return $reviews;
 }
