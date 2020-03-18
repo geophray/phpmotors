@@ -1,63 +1,72 @@
-body {
-    background-image: url("../images/site/small_check.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100%;
-
-    .site-wrapper {
-        border: 4px solid $primaryColor;
-        margin: 10px auto;
-        border-radius: $borderRadius;
-
-        nav {
-            ul {
-                li {
-                    a {
-                        padding: 1.2em;
+html {
+    body {
+        background-image: url("../images/site/small_check.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100%;
+    
+        .site-wrapper {
+            border: 4px solid $primaryColor;
+            margin: 10px auto;
+            border-radius: $borderRadius;
+    
+            nav {
+                ul {
+                    li {
+                        a {
+                            padding: 1.2em;
+                        }
+                    }
+                }
+            }
+    
+            main {
+                h1{
+                    font-size: 2em;
+                }
+                h2{
+                    font-size: 1.8em;
+                }
+    
+                #own_a_delo_today {
+                    #delo_description {
+                        font-size: 1em;
+                    }
+    
+                    #own_today_button {
+                        position: absolute;
+                        left: 0;
+                        top: 4em;
+                        width: 150px;
+                    }
+    
+                    #delo_description, #own_today_button {
+                        margin-left: 3em;
+                    }
+                }
+    
+                #reviews_upgrades {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    grid-template-areas: "upgrades reviews";
+                    gap: 10%;
+                    padding: 5%;
+                    #delo_reviews {
+                        grid-area: reviews;
+                    }
+    
+                    #delo_upgrades {
+                        grid-area: upgrades;
+                    }
+                }
+                #inventory-reviews {
+                    .all-reviews {
+                        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                     }
                 }
             }
         }
-
-        main {
-            h1{
-                font-size: 2em;
-            }
-            h2{
-                font-size: 1.8em;
-            }
-
-            #own_a_delo_today {
-                #delo_description {
-                    font-size: 1em;
-                }
-
-                #own_today_button {
-                    position: absolute;
-                    left: 0;
-                    top: 4em;
-                    width: 150px;
-                }
-
-                #delo_description, #own_today_button {
-                    margin-left: 3em;
-                }
-            }
-
-            #reviews_upgrades {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                grid-template-areas: "upgrades reviews";
-                gap: 10%;
-                padding: 5%;
-                #delo_reviews {
-                    grid-area: reviews;
-                }
-
-                #delo_upgrades {
-                    grid-area: upgrades;
-                }
-            }
-        }
     }
+
 }
+

@@ -60,6 +60,10 @@ html {
                     color: $primaryColor;
                 }
 
+                .rounded-corners {
+                    border-radius: 10px;
+                }
+
                 .error-message {
                     color: red;
                     font-size: larger;
@@ -78,7 +82,7 @@ html {
                     color: $white;
                 }
 
-                .delete {
+                .delete, #delete {
                     background-color: red;
                     color: $white;
                 }
@@ -89,7 +93,7 @@ html {
                     border-radius: 5px;
                 }
 
-                .modify:hover, .delete:hover {
+                .modify:hover, .delete:hover, #delete:hover {
                     background-color: $mediumGray;
                 }
 
@@ -98,7 +102,7 @@ html {
                 }
 
                 .grow:hover { 
-                    transform: scale(1.05); 
+                    transform: scale(1.1); 
                 }
 
                 .label {
@@ -214,7 +218,7 @@ html {
                     }
                 }
 
-                #inventoryDisplay {
+                table {
                     td {
                         padding: 10px 2px;
                     }
@@ -261,6 +265,34 @@ html {
                     }
                     p {
                         margin: 0;
+                    }
+                }
+
+                #inventory-reviews {
+                    margin-top: 1em;
+                    padding: 1em;
+                    background-color: $lightGray;
+                    form {
+                        label{
+                            color: $white;
+                        }
+                    }
+                    .all-reviews {
+                        display: grid;
+                        grid-template-columns: 1fr;
+                        gap: 1em;
+                        .single-review {
+                            padding: 1em;
+                            background: $white;
+                            .review-buttons {
+                                display: flex;
+                                justify-content: space-between;
+                            }
+                            .review-meta {
+                                font-size: smaller;
+                                color: $darkGray;
+                            }
+                        }
                     }
                 }
             }

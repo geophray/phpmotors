@@ -103,10 +103,17 @@ switch ($action){
         break;
         
     case 'review-deleted': // Handle the review deletion
-        // delete review
-        // confirm deletion
-        //set message
-        header('Location: /phpmotors/accounts/');
+        $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+        $reviewDeleted = deleteReview($reviewId);
+        if($reviewDeleted === 1) {
+            $_SESSION['message'] = "<p class='success-message'>Review deleted successfully.</p>";
+            header('Location: /phpmotors/accounts/');
+            exit;
+        } else {
+            $_SESSION['message'] = "<p class='error-message'>Unable to delete review. Please try again.</p>";
+            header('Location: /phpmotors/accounts/');
+            exit;
+        }
         break;
 
     default: // Return authenticated users to admin view, and unauthenticated users to home view.

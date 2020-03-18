@@ -16,7 +16,8 @@
         <nav>
             <?php echo $navList; ?>
         </nav>
-        <main id="vehicle-details-wrapper">
+        <main>
+            <section id="vehicle-details-wrapper">
             <?php 
                 if (isset($_SESSION['message'])) {
                     $message = $_SESSION['message'];
@@ -30,7 +31,8 @@
                     echo $vehicleDisplay;
                 } 
             ?>
-            <section id="inventory_reviews">
+            </section>
+            <section id="inventory-reviews">
                 <h2>Customer Reviews</h2>
                 <?php
                     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {

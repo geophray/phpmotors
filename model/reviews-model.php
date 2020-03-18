@@ -20,7 +20,10 @@ function insertReview($reviewText, $reviewDate, $invId, $clientId) {
 // Get reviews for a specific inventory item
 function getReviewsByInvId($invId) {
     $db = phpmotorsConnect(); 
-    $sql = ' SELECT * FROM reviews WHERE invId = :invId'; 
+    $sql = ' SELECT * 
+            FROM reviews 
+            WHERE invId = :invId
+            ORDER BY reviewDate DESC'; 
     $stmt = $db->prepare($sql); 
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT); 
     $stmt->execute(); 
@@ -32,7 +35,10 @@ function getReviewsByInvId($invId) {
 // Get reviews written by a specific client
 function getReviewsByClientId($clientId) {
     $db = phpmotorsConnect(); 
-    $sql = ' SELECT * FROM reviews WHERE clientId = :clientId'; 
+    $sql = ' SELECT * 
+            FROM reviews 
+            WHERE clientId = :clientId
+            ORDER BY reviewDate DESC'; 
     $stmt = $db->prepare($sql); 
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT); 
     $stmt->execute(); 

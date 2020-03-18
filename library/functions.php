@@ -159,12 +159,18 @@ function generateScreenName($client) {
 function buildInventoryReviewsList($invReviews) {
     $reviews = "<div class='all-reviews'>";
     foreach ($invReviews as $singleReview) {
-        $reviews .= '<div class="single-review">';
+        $reviews .= '<div class="single-review rounded-corners">';
         $client = getClientById($singleReview['clientId']);
         $screenName = generateScreenName($client);
         $reviewDate = formatReviewDate($singleReview['reviewDate']); 
         $reviews .= "<h3>$screenName <span class='review-meta'>wrote on $reviewDate:</span></h3>";
         $reviews .= "<p>$singleReview[reviewText]</p>";
+        if(isset($_SESSION['clientData']) && $_SESSION['clientData']['clientId'] === $singleReview['clientId']) {
+            $reviews .= "<span class='review-buttons'>";
+            $reviews .= "<a class='grow modify' href='/phpmotors/reviews?action=edit-review&reviewId=$singleReview[reviewId]' title='Click to edit'>Edit</a>";
+            $reviews .= "<a class='grow delete' href='/phpmotors/reviews?action=delete-review&reviewId=$singleReview[reviewId]' title='Click to delete'>Delete</a>";
+            $reviews .= "</span>";
+        }
         $reviews .= '</div>';
        }
     $reviews .= "</div>";
@@ -178,7 +184,7 @@ function buildClientReviewsList($clientReviews) {
         $reviews .= '<tr class="single-review">';
         $invItem = getInvItemInfo($singleReview['invId']);
         $reviewDate =  formatReviewDate($singleReview['reviewDate']);         
-        $reviews .= "<td><span class='label'>$invItem[invMake] $invItem[invModel]</span> (Reviewed on $reviewDate)</td>"; 
+        $reviews .= "<td><a href='/phpmotors/vehicles/?action=vehicle&invId=$invItem[invId]'><span class='label'>$invItem[invMake] $invItem[invModel]</span></a> (Reviewed on $reviewDate)</td>"; 
         $reviews .= "<td><a class='grow modify' href='/phpmotors/reviews?action=edit-review&reviewId=$singleReview[reviewId]' title='Click to edit'>Edit</a></td>"; 
         $reviews .= "<td><a class='grow delete' href='/phpmotors/reviews?action=delete-review&reviewId=$singleReview[reviewId]' title='Click to delete'>Delete</a></td>";
         $reviews .= "</tr>";
