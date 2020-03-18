@@ -32,8 +32,7 @@ function buildInventoryList(data) {
     // Set up the table body 
     dataTable += '<tbody>'; 
     // Iterate over all vehicles in the array and put each in a row 
-    data.forEach(function (element) { 
-     console.log(element.invId + ", " + element.invModel); 
+    data.forEach(function (element) {  
      dataTable += `<tr><td>${element.invMake} ${element.invModel}</td>`; 
      dataTable += `<td><a class='grow modify' href='/phpmotors/vehicles?action=mod&id=${element.invId}' title='Click to modify'>Modify</a></td>`; 
      dataTable += `<td><a class='grow delete' href='/phpmotors/vehicles?action=del&id=${element.invId}' title='Click to delete'>Delete</a></td></tr>`; 

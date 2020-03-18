@@ -49,7 +49,7 @@
                         <input type="text" <?php echo "value='$screenName'"  ?> id="screenName" name="screenName" readonly>
                     </div>
                     <div>
-                        <label for="reviewText">Description</label>
+                        <label for="reviewText">Review Text</label>
                         <textarea rows=5 id="reviewText" name="reviewText" required></textarea>
                     </div>
                     <div>

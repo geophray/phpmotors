@@ -38,12 +38,11 @@
                 unset($_SESSION['message']);
             ?>
             <p>You are logged in.</p>
-            <!-- <ul>
+            <ul>
                 <li><span class="label">First Name:</span> <?php echo $_SESSION['clientData']['clientFirstname'] ?></li>
                 <li><span class="label">Last Name:</span> <?php echo $_SESSION['clientData']['clientLastname'] ?></li>
                 <li><span class="label">Email:</span> <?php echo $_SESSION['clientData']['clientEmail'] ?></li>
-                <li><span class="label">Client Level:</span> <?php echo $_SESSION['clientData']['clientLevel'] ?></li>
-            </ul> -->
+            </ul>
             <p><a href='/phpmotors/accounts/index.php?action=update-account-info'>Update Account Information</a></p>
             <?php
                 if($_SESSION['clientData']['clientLevel'] > 1) {
@@ -53,6 +52,12 @@
                         <p>
                             <a href='/phpmotors/vehicles/'>Vehicle Management</a>
                         </p>";
+                }
+                $clientReviews = getReviewsByClientId($_SESSION['clientData']['clientId']);
+                if($clientReviews) {
+                    echo "<h2>Manage Your Product Reviews</h2>";
+                    $reviews = buildClientReviewsList($clientReviews);
+                    echo $reviews;
                 }
             ?>
         </main>

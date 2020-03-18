@@ -162,13 +162,32 @@ function buildInventoryReviewsList($invReviews) {
         $reviews .= '<div class="single-review">';
         $client = getClientById($singleReview['clientId']);
         $screenName = generateScreenName($client);
-
-        // date_default_timezone_set('UTC');
-        $reviewDate =  date ("d F, Y", strtotime($singleReview['reviewDate'])); 
+        $reviewDate = formatReviewDate($singleReview['reviewDate']); 
         $reviews .= "<h3>$screenName <span class='review-meta'>wrote on $reviewDate:</span></h3>";
         $reviews .= "<p>$singleReview[reviewText]</p>";
         $reviews .= '</div>';
        }
     $reviews .= "</div>";
     return $reviews;
+}
+
+// Function for generating existing reviews on the user admin view
+function buildClientReviewsList($clientReviews) {
+    $reviews = "<table>";
+    foreach ($clientReviews as $singleReview) {
+        $reviews .= '<tr class="single-review">';
+        $invItem = getInvItemInfo($singleReview['invId']);
+        $reviewDate =  formatReviewDate($singleReview['reviewDate']);         
+        $reviews .= "<td><span class='label'>$invItem[invMake] $invItem[invModel]</span> (Reviewed on $reviewDate)</td>"; 
+        $reviews .= "<td><a class='grow modify' href='/phpmotors/reviews?action=edit-review&reviewId=$singleReview[reviewId]' title='Click to edit'>Edit</a></td>"; 
+        $reviews .= "<td><a class='grow delete' href='/phpmotors/reviews?action=delete-review&reviewId=$singleReview[reviewId]' title='Click to delete'>Delete</a></td>";
+        $reviews .= "</tr>";
+       }
+    $reviews .= "</table>";
+    return $reviews;
+}
+
+// Function to format dates for reviews
+function formatReviewDate($dateString) {
+    return date ("d F, Y", strtotime($dateString));
 }
