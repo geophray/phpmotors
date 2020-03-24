@@ -8,8 +8,6 @@ session_start();
 require_once '../library/connections.php';
 // Get the PHP Motors main model 
 require_once '../model/main-model.php';
-// Get the PHP Motors accounts model 
-require_once '../model/accounts-model.php';
 // Get the PHP Motors main model 
 require_once '../model/vehicles-model.php';
 // Get the PHP Motors reviews model
