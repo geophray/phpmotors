@@ -17,7 +17,7 @@
             <?php echo $navList; ?>
         </nav>
         <main>
-            <h1><?php echo $invItem['invMake'] . ' ' . $invItem['invModel'] ?> Review</h1>
+            <h1><?php echo $review['invMake'] . ' ' . $review['invModel'] ?> Review</h1>
             <p>Reviewed on <?php echo formatReviewDate($review['reviewDate']) ?></p>
             <?php 
                 if (isset($_SESSION['reviewMessage'])) {
