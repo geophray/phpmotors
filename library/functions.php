@@ -149,9 +149,9 @@ function formatCurrencyUSD($price) {
 }
 
 // Function for generating a users screen name when leaving reviews
-function generateScreenName($client) {
-    $firstInitial = strtoupper(substr($client['clientFirstname'], 0, 1));
-    $lastName = ucfirst($client['clientLastname']);
+function generateScreenName($clientFirstname, $clientLastname) {
+    $firstInitial = strtoupper(substr($clientFirstname, 0, 1));
+    $lastName = ucfirst($clientLastname);
     return $firstInitial . $lastName;
 }
 
@@ -161,7 +161,7 @@ function buildInventoryReviewsList($invReviews) {
     foreach ($invReviews as $singleReview) {
         $reviews .= '<div class="single-review rounded-corners">';
         $client = getClientById($singleReview['clientId']);
-        $screenName = generateScreenName($client);
+        $screenName = generateScreenName($singleReview['clientFirstname'], $singleReview['clientLastname']);
         $reviewDate = formatReviewDate($singleReview['reviewDate']); 
         $reviews .= "<h3>$screenName <span class='review-meta'>wrote on $reviewDate:</span></h3>";
         $reviews .= "<p>$singleReview[reviewText]</p>";

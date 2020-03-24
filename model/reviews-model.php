@@ -20,10 +20,12 @@ function insertReview($reviewText, $reviewDate, $invId, $clientId) {
 // Get reviews for a specific inventory item
 function getReviewsByInvId($invId) {
     $db = phpmotorsConnect(); 
-    $sql = ' SELECT * 
+    $sql = ' SELECT inventory.invMake, inventory.invModel, reviews.reviewId, reviews.reviewText, reviews.reviewDate, clients.clientFirstname, clients.clientLastname, clients.clientId
             FROM reviews 
-            WHERE invId = :invId
-            ORDER BY reviewDate DESC'; 
+            INNER JOIN inventory ON reviews.invId=inventory.invId
+            INNER JOIN clients ON reviews.clientId=clients.clientId
+            WHERE reviews.invId = :invId
+            ORDER BY reviews.reviewDate DESC'; 
     $stmt = $db->prepare($sql); 
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT); 
     $stmt->execute(); 

@@ -36,7 +36,7 @@
                 <h2>Customer Reviews</h2>
                 <?php
                     if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                        $screenName = generateScreenName($_SESSION['clientData']);
+                        $screenName = generateScreenName($_SESSION['clientData']['clientFirstname'], $_SESSION['clientData']['clientLastname']);
                 ?>
                 <h3>Review the <?php echo $vehicle['invMake'] . " " . $vehicle['invModel'] ?></h3>
                 <?php 
