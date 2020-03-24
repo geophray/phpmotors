@@ -37,10 +37,11 @@ function getReviewsByInvId($invId) {
 // Get reviews written by a specific client
 function getReviewsByClientId($clientId) {
     $db = phpmotorsConnect(); 
-    $sql = ' SELECT * 
+    $sql = ' SELECT inventory.invMake, inventory.invModel, inventory.invId, reviews.reviewId, reviews.reviewDate
             FROM reviews 
-            WHERE clientId = :clientId
-            ORDER BY reviewDate DESC'; 
+            INNER JOIN inventory ON reviews.invId=inventory.invId
+            WHERE reviews.clientId = :clientId
+            ORDER BY reviews.reviewDate DESC'; 
     $stmt = $db->prepare($sql); 
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT); 
     $stmt->execute(); 

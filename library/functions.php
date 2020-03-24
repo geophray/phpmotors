@@ -160,7 +160,6 @@ function buildInventoryReviewsList($invReviews) {
     $reviews = "<div class='all-reviews'>";
     foreach ($invReviews as $singleReview) {
         $reviews .= '<div class="single-review rounded-corners">';
-        $client = getClientById($singleReview['clientId']);
         $screenName = generateScreenName($singleReview['clientFirstname'], $singleReview['clientLastname']);
         $reviewDate = formatReviewDate($singleReview['reviewDate']); 
         $reviews .= "<h3>$screenName <span class='review-meta'>wrote on $reviewDate:</span></h3>";
@@ -182,9 +181,8 @@ function buildClientReviewsList($clientReviews) {
     $reviews = "<table>";
     foreach ($clientReviews as $singleReview) {
         $reviews .= '<tr class="single-review">';
-        $invItem = getInvItemInfo($singleReview['invId']);
         $reviewDate =  formatReviewDate($singleReview['reviewDate']);         
-        $reviews .= "<td><a href='/phpmotors/vehicles/?action=vehicle&invId=$invItem[invId]'><span class='label'>$invItem[invMake] $invItem[invModel]</span></a> (Reviewed on $reviewDate)</td>"; 
+        $reviews .= "<td><a href='/phpmotors/vehicles/?action=vehicle&invId=$singleReview[invId]'><span class='label'>$singleReview[invMake] $singleReview[invModel]</span></a> (Reviewed on $reviewDate)</td>"; 
         $reviews .= "<td><a class='grow modify' href='/phpmotors/reviews?action=edit-review&reviewId=$singleReview[reviewId]' title='Click to edit'>Edit</a></td>"; 
         $reviews .= "<td><a class='grow delete' href='/phpmotors/reviews?action=delete-review&reviewId=$singleReview[reviewId]' title='Click to delete'>Delete</a></td>";
         $reviews .= "</tr>";
