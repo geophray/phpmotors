@@ -98,7 +98,9 @@ switch ($action){
         
     case 'review-deleted': // Handle the review deletion
         $reviewId = filter_input(INPUT_POST, 'reviewId', FILTER_SANITIZE_NUMBER_INT);
+
         $reviewDeleted = deleteReview($reviewId);
+        
         if($reviewDeleted === 1) {
             $_SESSION['message'] = "<p class='success-message'>Review deleted successfully.</p>";
             header('Location: /phpmotors/accounts/');
