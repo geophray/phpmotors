@@ -1,14 +1,22 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.3
+-- version 4.9.2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Generation Time: Mar 24, 2020 at 09:14 PM
--- Server version: 5.7.26
--- PHP Version: 7.4.2
+-- Host: 127.0.0.1
+-- Generation Time: Mar 28, 2020 at 03:02 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `phpmotors`
@@ -49,7 +57,7 @@ CREATE TABLE `clients` (
   `clientEmail` varchar(40) NOT NULL,
   `clientPassword` varchar(255) NOT NULL,
   `clientLevel` enum('1','2','3') NOT NULL DEFAULT '1',
-  `comment` text
+  `comment` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -59,7 +67,9 @@ CREATE TABLE `clients` (
 INSERT INTO `clients` (`clientId`, `clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `clientLevel`, `comment`) VALUES
 (4, 'Jeff', 'Maughan', 'geophray@gmail.com', '$2y$10$Ut/vGth.DS76sdWbh2rYOebNO872SuRtVrovsQIWlOcLzCEURuIg6', '1', NULL),
 (5, 'Admin', 'User', 'admin@cit336.net', '$2y$10$zMUCsvVUuBHz4u7x6mw.RuuDN3v.wEaAcWwN63CCz613ERdmQ8nwi', '3', NULL),
-(8, 'Kallie', 'Maughan', 'kallie.maughan@gmail.com', '$2y$10$KzZXvK14gPBRl/4fkT8C.uth7zZgGwDD0CuGq/AjDNpcuHyGGu7BC', '1', NULL);
+(8, 'Kallie', 'Maughan', 'kallie.maughan@gmail.com', '$2y$10$KzZXvK14gPBRl/4fkT8C.uth7zZgGwDD0CuGq/AjDNpcuHyGGu7BC', '1', NULL),
+(9, 'Geophreigh', 'Maughan', 'geophray+234556@gmail.com', '$2y$10$2uNYFjF3oLsBI9uRSUMyuOyJlDW7fviCo40HT38MXrbpDR0UFtdWa', '1', NULL),
+(10, 'Geophreigh', 'Maughan', 'geophray+test@gmail.com', '$2y$10$8HDFzv/21jVLtperghlYHOkeW.10dB27v7JJ6DIKyM4dbMqUG.U8.', '1', NULL);
 
 -- --------------------------------------------------------
 
@@ -71,7 +81,7 @@ CREATE TABLE `inventory` (
   `invId` int(10) UNSIGNED NOT NULL,
   `invMake` varchar(30) NOT NULL,
   `invModel` varchar(30) NOT NULL,
-  `invDescription` text,
+  `invDescription` text DEFAULT NULL,
   `invImage` varchar(50) NOT NULL,
   `invThumbnail` varchar(50) NOT NULL,
   `invPrice` decimal(10,0) NOT NULL,
@@ -110,7 +120,7 @@ INSERT INTO `inventory` (`invId`, `invMake`, `invModel`, `invDescription`, `invI
 CREATE TABLE `reviews` (
   `reviewId` int(10) UNSIGNED NOT NULL,
   `reviewText` text CHARACTER SET latin1 NOT NULL,
-  `reviewDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `reviewDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `invId` int(10) UNSIGNED NOT NULL,
   `clientId` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -120,10 +130,11 @@ CREATE TABLE `reviews` (
 --
 
 INSERT INTO `reviews` (`reviewId`, `reviewText`, `reviewDate`, `invId`, `clientId`) VALUES
-(3, 'This is my dream car. Like, for reals, yo.', '2020-03-18 19:31:38', 6, 4),
+(3, 'This is my dream car. ', '2020-03-18 19:31:38', 6, 4),
 (4, 'This IS a pretty sweet car. I would like one too.', '2020-03-18 19:32:22', 6, 5),
-(6, 'This is my daily driver. It&#39;s a little bit of a gas hog, but traffic is never an issue... ', '2020-03-18 19:38:50', 4, 5),
-(8, 'This is my actual car.', '2020-03-24 21:07:52', 5, 4);
+(6, 'This is my daily driver. It&#39;s a little bit of a gas hog, but traffic us never an issue.', '2020-03-18 19:38:50', 4, 5),
+(7, 'Drove this bad boy off the dealership lot yesterday and I have zero regrets...', '2020-03-18 20:22:27', 10, 5),
+(8, 'This is my dream car. Very fuel efficient!', '2020-03-28 01:49:02', 8, 5);
 
 --
 -- Indexes for dumped tables
@@ -171,7 +182,7 @@ ALTER TABLE `carclassification`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -183,7 +194,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `reviewId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -201,3 +212,8 @@ ALTER TABLE `inventory`
 ALTER TABLE `reviews`
   ADD CONSTRAINT `FK_reviews_clients` FOREIGN KEY (`clientId`) REFERENCES `clients` (`clientId`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_reviews_inventory` FOREIGN KEY (`invId`) REFERENCES `inventory` (`invId`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

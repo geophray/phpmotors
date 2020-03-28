@@ -53,7 +53,7 @@ function getReviewsByClientId($clientId) {
 // Get a specific review
 function getReviewById($reviewId) {
     $db = phpmotorsConnect(); 
-    $sql = ' SELECT reviews.reviewId, reviews.reviewText, inventory.invMake, inventory.invModel 
+    $sql = ' SELECT reviews.reviewId, reviews.reviewText, reviews.reviewDate, inventory.invMake, inventory.invModel 
             FROM reviews 
             INNER JOIN inventory ON reviews.invId=inventory.invId
             WHERE reviews.reviewId = :reviewId'; 
